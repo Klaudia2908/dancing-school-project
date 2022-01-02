@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+    Zalogowany użytkownik: <span sec:authentication="name"></span>
+    Uprawnienia: <span sec:authentication="principal.authorities"></span>
+
+    <form name="logoutForm" th:action="@{/logout}" method="post">
+        <input type="submit" value="Wyloguj się"/>
+    </form>
+</div>
+
+<div sec:authorize="isAnonymous()">
+    <form name="login" th:action="@{/login}" method="get">
+        <input type="submit" value="Zaloguj się"/>
+    </form>
+</div>
+
+</body>
+</html>

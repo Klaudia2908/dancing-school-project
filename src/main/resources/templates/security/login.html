@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zaloguj się</title>
+</head>
+<body>
+    <h1>Logowanie do serwisu</h1>
+    <p th:if="${loginError}">Nieprawidłowe dane logowania</p>
+    <form th:action="@{/login}" method="post">
+        <label for="username">Nazwa Użytkownika</label>:
+        <input type="text" id="username" name="username" autofocus="autofocus"/> <br/>
+        <label for="password">Hasło</label>:
+        <input type="password" id="password" name="password"/> <br/>
+        <input type="submit" value="Zaloguj"/>
+    </form>
+
+</body>
+</html>
