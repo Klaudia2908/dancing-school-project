@@ -7,7 +7,6 @@
 <body>
 <div sec:authorize="isAuthenticated()">
     Zalogowany użytkownik: <span sec:authentication="name"></span>
-    Uprawnienia: <span sec:authentication="principal.authorities"></span>
 
     <form name="logoutForm" th:action="@{/logout}" method="post">
         <input type="submit" value="Wyloguj się"/>
@@ -17,6 +16,9 @@
 <div sec:authorize="isAnonymous()">
     <form name="login" th:action="@{/login}" method="get">
         <input type="submit" value="Zaloguj się"/>
+    </form>
+    <form name="register" th:action="@{/register}" method="get">
+        <input type="submit" value="Rejestracja"/>
     </form>
 </div>
 

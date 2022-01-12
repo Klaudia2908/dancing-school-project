@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<h1>Rejestracja w serwisie</h1>
+
+<div class="container">
+    <form action="#" th:action="@{/register}" th:object="${registerCommand}" method="post">
+
+        <label for="username">Nazwa Użytkownika</label>:
+        <input type="text" id="username" name="username" th:field="*{username}"/> <br/>
+
+        <label for="password">Hasło</label>:
+        <input type="password" id="password" name="password" th:field="*{password}"/> <br/>
+
+        <label for="firstName">Imię</label>:
+        <input type="text" id="firstName" name="firstName" th:field="*{firstName}"/> <br/>
+
+        <label for="lastName">Nazwisko</label>:
+        <input type="text" id="lastName" name="lastName" th:field="*{lastName}"/> <br/>
+
+        <label for="birthDate">Data urodzenia</label>:
+        <input type="text" id="birthDate" name="lastName" th:field="*{birthDate}"/> <br/>
+
+        <label for="gender">Płec</label>:
+        <input type="text" id="gender" name="gender" th:field="*{gender}"/> <br/>
+
+        <label for="description">Opis</label>:
+        <input type="text" id="description" name="description" th:field="*{description}"/> <br/>
+
+        <button class="btn btn-primary" type="submit">Zatwierdź</button>
+    </form>
+</div>
+
+<script>
+    $('.datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+        startDate: '-3d'
+    });
+</script>
+
+</body>
+</html>
