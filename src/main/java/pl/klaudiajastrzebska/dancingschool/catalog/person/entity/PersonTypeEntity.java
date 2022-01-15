@@ -1,4 +1,4 @@
-package pl.klaudiajastrzebska.dancingschool.catalog.entity;
+package pl.klaudiajastrzebska.dancingschool.catalog.person.entity;
 
 import lombok.Data;
 

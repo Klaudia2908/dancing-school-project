@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Strona główna</title>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/home.css}" rel="stylesheet">
 </head>
 <body>
-<div sec:authorize="isAuthenticated()">
-    Zalogowany użytkownik: <span sec:authentication="name"></span>
 
-    <form name="logoutForm" th:action="@{/logout}" method="post">
-        <input type="submit" value="Wyloguj się"/>
-    </form>
-</div>
-
-<div sec:authorize="isAnonymous()">
-    <form name="login" th:action="@{/login}" method="get">
-        <input type="submit" value="Zaloguj się"/>
-    </form>
-    <form name="register" th:action="@{/register}" method="get">
-        <input type="submit" value="Rejestracja"/>
-    </form>
+<div th:insert="navbar.html :: navbar"/>
+<div class="container">
+    <div class="city-form">
+        <form th:action="@{/schools}" method="get">
+            <h1>Znajdź szkołę taneczną</h1>
+            <label for="city">Podaj miasto:</label>
+            <input type="text" id="city" name="city" th:name="city" autofocus="autofocus"/> <br/>
+        </form>
+    </div>
 </div>
 
 </body>

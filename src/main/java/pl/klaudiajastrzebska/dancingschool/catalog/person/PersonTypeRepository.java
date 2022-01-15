@@ -1,7 +1,7 @@
-package pl.klaudiajastrzebska.dancingschool.catalog;
+package pl.klaudiajastrzebska.dancingschool.catalog.person;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.klaudiajastrzebska.dancingschool.catalog.entity.PersonTypeEntity;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonTypeEntity;
 
 import java.util.Optional;
 

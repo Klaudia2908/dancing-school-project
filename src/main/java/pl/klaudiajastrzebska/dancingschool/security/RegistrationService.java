@@ -1,11 +1,10 @@
 package pl.klaudiajastrzebska.dancingschool.security;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.klaudiajastrzebska.dancingschool.catalog.CatalogApi;
-import pl.klaudiajastrzebska.dancingschool.catalog.dto.AddNewPersonCommand;
-import pl.klaudiajastrzebska.dancingschool.catalog.dto.PersonType;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.AddNewPersonCommand;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.PersonType;
 import pl.klaudiajastrzebska.dancingschool.security.entity.UserEntity;
 import pl.klaudiajastrzebska.dancingschool.security.entity.UserRolesEntity;
 

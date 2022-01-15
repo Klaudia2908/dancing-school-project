@@ -1,0 +1,31 @@
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.navbar-wrapper {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+}
+
+.navbar-component {
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    border: #f3f3f3 1px solid;
+}
+
+.navbar-component a {
+    color: black;
+    text-decoration: none;
+}
+
+.navbar-component:hover {
+    background-color: darkkhaki;
+}

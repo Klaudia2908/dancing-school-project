@@ -1,4 +1,4 @@
-package pl.klaudiajastrzebska.dancingschool.catalog.dto;
+package pl.klaudiajastrzebska.dancingschool.catalog.person.dto;
 
 import lombok.Builder;
 import lombok.Value;

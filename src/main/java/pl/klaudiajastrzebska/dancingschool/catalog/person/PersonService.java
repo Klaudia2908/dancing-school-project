@@ -1,18 +1,18 @@
-package pl.klaudiajastrzebska.dancingschool.catalog;
+package pl.klaudiajastrzebska.dancingschool.catalog.person;
 
 import lombok.RequiredArgsConstructor;
-import pl.klaudiajastrzebska.dancingschool.catalog.dto.AddNewPersonCommand;
-import pl.klaudiajastrzebska.dancingschool.catalog.entity.PersonEntity;
-import pl.klaudiajastrzebska.dancingschool.catalog.entity.PersonTypeEntity;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.AddNewPersonCommand;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonEntity;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonTypeEntity;
 
 import java.util.Optional;
 
 @RequiredArgsConstructor
-class PersonService {
+public class PersonService {
     private final PersonRepository personRepository;
     private final PersonTypeRepository personTypeRepository;
 
-    void addNewPerson(AddNewPersonCommand command) {
+    public void addNewPerson(AddNewPersonCommand command) {
         PersonEntity personEntity = preparePersonEntity(command);
 
         personRepository.save(personEntity);
