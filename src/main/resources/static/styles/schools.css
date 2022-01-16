@@ -1,0 +1,33 @@
+.container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.schools {
+    width: 80%;
+    margin: 0;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/*dodać porządne stylowanie do szkół i w zasadzie to przerobić tą listę na nie tabele a jakiś ładny list component*/
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #04AA6D;
+    color: white;
+}

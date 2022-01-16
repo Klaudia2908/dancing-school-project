@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration("schoolConfiguration")
 class Config {
     @Bean
-    SchoolService schoolService(SchoolRepository repository) {
-        return new SchoolService(repository);
+    SchoolService schoolService(SchoolAddressRepository schoolAddressRepository) {
+        return new SchoolService(schoolAddressRepository);
     }
 }

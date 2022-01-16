@@ -8,5 +8,9 @@ import lombok.Value;
 public class SchoolDto {
     String name;
     String description;
-
+    String city;
+    String numberOfTheBuilding;
+    String flatNumber;
+    String postCode;
+    String street;
 }

@@ -4,25 +4,42 @@
     <meta charset="UTF-8">
     <title>Szkoły</title>
     <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/schools.css}" rel="stylesheet">
 </head>
 <body>
+
 <div th:insert="navbar.html :: navbar"/>
-<table>
-    <thead>
-    <tr>
-        <th> Nazwa</th>
-        <th> Opis</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${schools.empty}">
-        <td colspan="2"> Brak szkół do wyświetlenia</td>
-    </tr>
-    <tr th:each="school : ${schools}">
-        <td><span th:text="${school.name}"> Title </span></td>
-        <td><span th:text="${school.description}"> Author </span></td>
-    </tr>
-    </tbody>
-</table>
+
+<div class="container">
+    <div class="schools">
+        <table>
+            <thead>
+            <tr>
+                <th> Nazwa</th>
+                <th> Opis</th>
+                <th> Miejscowość</th>
+                <th> Ulica</th>
+                <th> Numer budynku</th>
+                <th> Numer lokalu</th>
+                <th> Kod pocztowy</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${schools.empty}">
+                <td colspan="2"> Brak szkół do wyświetlenia</td>
+            </tr>
+            <tr th:each="school : ${schools}">
+                <td><span th:text="${school.name}"> Nazwa </span></td>
+                <td><span th:text="${school.description}"> Opis </span></td>
+                <td><span th:text="${school.city}"> Miejscowość </span></td>
+                <td><span th:text="${school.street}"> Ulica </span></td>
+                <td><span th:text="${school.numberOfTheBuilding}"> Numer budynku </span></td>
+                <td><span th:text="${school.flatNumber}"> Number lokalu </span></td>
+                <td><span th:text="${school.postCode}"> Kod pocztowy </span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>
