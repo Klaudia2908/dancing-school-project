@@ -3,10 +3,20 @@
     padding: 0;
     box-sizing: border-box;
 }
-.navbar-wrapper{
+.navbar-wrapper {
     margin: auto;
     padding: 0px 30px;
 
+}
+
+.logo-container{
+    display: flex;
+    justify-content: start;
+}
+
+.menu-container{
+    display: flex;
+    justify-content: end;
 }
 
 .navbar {

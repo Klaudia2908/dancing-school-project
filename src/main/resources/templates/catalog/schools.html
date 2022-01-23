@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Szkoły</title>
     <link th:href="@{/styles/navbar.css}" rel="stylesheet">
     <link th:href="@{/styles/schools.css}" rel="stylesheet">
+
 </head>
 <body>
 
@@ -22,6 +23,7 @@
                 <th> Numer budynku</th>
                 <th> Numer lokalu</th>
                 <th> Kod pocztowy</th>
+                <th> </th>
             </tr>
             </thead>
             <tbody>
@@ -36,6 +38,7 @@
                 <td><span th:text="${school.numberOfTheBuilding}"> Numer budynku </span></td>
                 <td><span th:text="${school.flatNumber}"> Number lokalu </span></td>
                 <td><span th:text="${school.postCode}"> Kod pocztowy </span></td>
+                <td><a th:href="@{schools/{school}(school=${school.shortName})}">Przejdź</a></td>
             </tr>
             </tbody>
         </table>

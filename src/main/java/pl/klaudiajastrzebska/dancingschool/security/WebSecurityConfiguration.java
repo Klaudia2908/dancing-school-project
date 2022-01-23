@@ -14,13 +14,15 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-//                .antMatchers("/h2-console/**").permitAll()
-//                .antMatchers("/login").permitAll()
-//                .antMatchers("/login-error").permitAll()
-//                .antMatchers("/register").permitAll()
-//                .antMatchers("/home").permitAll()
-//                .antMatchers("/assets/**").permitAll()
-//                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/login-error").permitAll()
+                .antMatchers("/register").permitAll()
+                .antMatchers("/schools").permitAll()
+                .antMatchers("/*").permitAll()
+
+                .antMatchers("/assets/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

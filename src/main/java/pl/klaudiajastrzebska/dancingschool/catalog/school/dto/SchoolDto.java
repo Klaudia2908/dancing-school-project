@@ -13,4 +13,5 @@ public class SchoolDto {
     String flatNumber;
     String postCode;
     String street;
+    String shortName;
 }

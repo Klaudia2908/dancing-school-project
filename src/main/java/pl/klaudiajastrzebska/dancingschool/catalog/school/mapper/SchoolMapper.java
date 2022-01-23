@@ -14,6 +14,7 @@ public class SchoolMapper {
                 .numberOfTheBuilding(entity.getNumberOfTheBuilding())
                 .postCode(entity.getPostCode())
                 .street(entity.getStreet())
+                .shortName(entity.getShortName())
                 .build();
     }
 }

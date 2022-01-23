@@ -27,6 +27,9 @@ public class SchoolAddressEntity {
     @Column(name = "KOD_POCZTOWY")
     private String postCode;
 
+    @Column(name = "IDENTYFIKATOR")
+    private String shortName;
+
     @ManyToOne
     @JoinColumn(name = "ID_SZKOLY", referencedColumnName = "ID")
     private SchoolEntity school;

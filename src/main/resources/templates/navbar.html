@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"s>
 <head>
     <meta charset="UTF-8">
     <title>Navbar</title>
@@ -9,23 +9,33 @@
 <body>
 <nav th:fragment="navbar" class="navbar">
             <div class="navbar-wrapper">
-                <div class="logo">
-                    <a th:href="@{/home}"><img src="../images/logo_portal2.png" title="logo" alt="logo"></a>
+                <div class="logo-container">
+                    <div class="logo">
+                        <a th:href="@{/home}"><img src="../images/logo_portal2.png" title="logo" alt="logo"></a>
+                    </div>
                 </div>
-                <div sec:authorize="isAnonymous()">
-                    <ul class="menu-list">
-                        <li><a th:href="@{/login}" >Logowanie</a></li>
+               <div class="menu-container">
+                   <div sec:authorize="isAnonymous()">
+                       <ul class="menu-list">
+                           <li><a th:href="@{/login}" >Logowanie</a></li>
 
-                        <li><a th:href="@{/register}" >Rejestracja</a></li>
+                           <li><a th:href="@{/register}" >Rejestracja</a></li>
 
-                    </ul>
-                </div>
+                       </ul>
+                   </div>
 
-                <div sec:authorize="isAuthenticated()">
-                    <ul class="menu-list">
-                    <li>  <a th:href="@{/logout}" >Wyloguj się</a></li>
-                    </ul>
-                </div>
+                   <div sec:authorize="hasAuthority('ADMIN')">
+                       <ul class="menu-list">
+                           <li>  <a th:href="@{/}" >Administruj</a></li>
+                       </ul>
+                   </div>
+
+                   <div sec:authorize="isAuthenticated()">
+                       <ul class="menu-list">
+                           <li>  <a th:href="@{/logout}" >Wyloguj się</a></li>
+                       </ul>
+                   </div>
+               </div>
             </div>
 </nav>
 </body>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${school.name}"></title>
+
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/school-info.css}" rel="stylesheet">
+</head>
+<body>
+
+<div th:insert="navbar.html :: navbar"/>
+
+<div class="container">
+    <div class="school-info-container">
+        <h1 th:text="${school.name}"></h1>
+        <p th:text="${school.description}"><p/>
+    </div>
+</div>
+
+</body>
+</html>

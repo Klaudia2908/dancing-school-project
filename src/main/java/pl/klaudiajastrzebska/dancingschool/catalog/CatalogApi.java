@@ -20,4 +20,8 @@ public class CatalogApi {
     public List<SchoolDto> getSchoolsByCity(String city) {
         return schoolService.getSchoolsByCity(city);
     }
+
+    public SchoolDto getSchoolByIdentifier(String schoolIdentifier) {
+        return schoolService.getSchoolByIdentifier(schoolIdentifier);
+    }
 }
