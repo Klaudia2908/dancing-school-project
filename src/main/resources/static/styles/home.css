@@ -1,13 +1,65 @@
-.container {
-    width: 100%;
-    height: 100%;
-    position: absolute;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.city-form {
-    margin: 0;
+header {
+    position: relative;
+    height: 100vh;
+    background-image: url(../images/taniec1.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
+}
+
+
+header h1 {
     position: absolute;
-    top: 10%;
+    top: 35%;
+    width: 100%;
+    padding: 20px;
+    font-size: 60px;
+    background-color: rgba(0, 0, 0, .5);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+
+label {
+    position: absolute;
+    bottom: 42%;
     left: 50%;
     transform: translateX(-50%);
+    font-size: 40px;
+    padding: 10px 50px;
+    font-family: roboto condensed, arial, sans-serif;
+    text-transform: uppercase;
+    background-color: transparent;
+    color: white;
 }
+
+input[type=text] {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    padding: 10px 50px;
+    font-family: roboto condensed, arial, sans-serif;
+    text-transform: uppercase;
+    background-color: transparent;
+    color: white;
+    border: 4px solid white;
+
+}
+
+
+
+
+

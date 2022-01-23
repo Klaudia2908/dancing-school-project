@@ -12,7 +12,7 @@ VALUES(1, 'CLIENT');
 
 --                                                                                                  użytkownicy
 INSERT INTO USERS(ID, LOGIN, HASLO, ID_S_UPRAWNIENIA)
-VALUES (1, 'zachu', '$2a$10$lXojkbR.q2zWWqlTgjQMUu1EZu7TD.vBZ03VC.ycrcxft2sr7qVmG', 1);
+VALUES (1, 'kjastr', '$2a$10$lXojkbR.q2zWWqlTgjQMUu1EZu7TD.vBZ03VC.ycrcxft2sr7qVmG', 1);
 
 --                                                                                                  szkoły
 INSERT INTO SZKOLY(ID, NAZWA, OPIS)

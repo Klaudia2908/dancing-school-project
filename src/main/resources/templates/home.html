@@ -7,17 +7,20 @@
     <link th:href="@{/styles/home.css}" rel="stylesheet">
 </head>
 <body>
-
+<nav>
 <div th:insert="navbar.html :: navbar"/>
-<div class="container">
+</nav>
+<header>
+    <h1>Znajdź szkołę taneczną</h1>
+    <div class="container">
     <div class="city-form">
         <form th:action="@{/schools}" method="get">
-            <h1>Znajdź szkołę taneczną</h1>
             <label for="city">Podaj miasto:</label>
             <input type="text" id="city" name="city" th:name="city" autofocus="autofocus"/> <br/>
         </form>
     </div>
 </div>
+</header>
 
 </body>
 </html>
