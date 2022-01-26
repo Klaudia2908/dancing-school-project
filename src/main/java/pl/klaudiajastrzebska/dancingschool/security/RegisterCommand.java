@@ -14,7 +14,6 @@ public class RegisterCommand {
     String firstName;
     String lastName;
     String gender;
-    String description;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     LocalDate birthDate;

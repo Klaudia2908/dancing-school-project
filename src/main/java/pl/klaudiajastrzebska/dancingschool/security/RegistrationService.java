@@ -48,7 +48,7 @@ class RegistrationService {
                 .gender(registerCommand.getGender())
                 .personType(PersonType.CLIENT)
                 .userId(userId)
-                .description(registerCommand.getDescription())
+                .description(null)
                 .build();
     }
 }

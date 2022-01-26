@@ -2,45 +2,54 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/f7d482549e.js" crossorigin="anonymous"></script>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/register.css}" rel="stylesheet">
 </head>
 
 <body>
-<h1>Rejestracja w serwisie</h1>
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+
 
 <div class="container">
-    <form action="#" th:action="@{/register}" th:object="${registerCommand}" method="post">
+    <div class="form_wrapper">
+        <h1>Dołącz do Nas!</h1>
+        <form action="#" th:action="@{/register}" th:object="${registerCommand}" method="post">
+            <div class="input_field"><span><i aria-hidden="true" class="fa fa-user"></i></span>
+                <input type="text" id="username" name="username" placeholder="Nazwa użytkownika"
+                       th:field="*{username}"/>
+            </div>
+            <div class="input_field"><span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                <input type="password" id="password" name="password" placeholder="Hasło" th:field="*{password}"/>
+                <br/>
+            </div>
+            <div class="input_field"><span><i aria-hidden="true" class="fa fa-user"></i></span>
+                <input type="text" id="firstName" name="firstName" placeholder="Imię" th:field="*{firstName}"/>
+                <br/>
+            </div>
+            <div class="input_field"><span><i aria-hidden="true" class="fa fa-user"></i></span>
+                <input type="text" id="lastName" name="lastName" placeholder="Nazwisko" th:field="*{lastName}"/>
+                <br/>
+            </div>
+            <div class="input_field"><span><i aria-hidden="true" class="fas fa-calendar-alt"></i></span>
+                <input type="text" id="birthDate" name="lastName" placeholder="Data urodzenia"
+                       th:field="*{birthDate}"/>
+                <br/>
+            </div>
 
-        <label for="username">Nazwa Użytkownika</label>:
-        <input type="text" id="username" name="username" th:field="*{username}"/> <br/>
+            <div class="input_field radio_option">
+                <input type="radio" id="male" name="gender" th:value="mężczyzna" th:field="*{gender}"/>
+                <label for="male">Mężczyzna</label>
+                <input type="radio" id="female" name="gender" th:value="kobieta" th:field="*{gender}"/>
+                <label for="female">Kobieta</label>
+            </div>
 
-        <label for="password">Hasło</label>:
-        <input type="password" id="password" name="password" th:field="*{password}"/> <br/>
-
-        <label for="firstName">Imię</label>:
-        <input type="text" id="firstName" name="firstName" th:field="*{firstName}"/> <br/>
-
-        <label for="lastName">Nazwisko</label>:
-        <input type="text" id="lastName" name="lastName" th:field="*{lastName}"/> <br/>
-
-        <label for="birthDate">Data urodzenia</label>:
-        <input type="text" id="birthDate" name="lastName" th:field="*{birthDate}"/> <br/>
-
-        <label for="gender">Płec</label>:
-        <input type="text" id="gender" name="gender" th:field="*{gender}"/> <br/>
-
-        <label for="description">Opis</label>:
-        <input type="text" id="description" name="description" th:field="*{description}"/> <br/>
-
-        <button class="btn btn-primary" type="submit">Zatwierdź</button>
-    </form>
+            <input class="button" type="submit" value="Zarejestruj się"/>
+        </form>
+    </div>
 </div>
-
-<script>
-    $('.datepicker').datepicker({
-        format: 'mm/dd/yyyy',
-        startDate: '-3d'
-    });
-</script>
 
 </body>
 </html>
