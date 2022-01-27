@@ -8,9 +8,9 @@
 
 </head>
 <body>
-
+<nav>
 <div th:insert="navbar.html :: navbar"/>
-
+</nav>
 <div class="container">
     <div class="schools">
         <table>
@@ -26,7 +26,7 @@
                 <th> </th>
             </tr>
             </thead>
-            <tbody>
+            <body>
             <tr th:if="${schools.empty}">
                 <td colspan="2"> Brak szkół do wyświetlenia</td>
             </tr>
@@ -40,7 +40,7 @@
                 <td><span th:text="${school.postCode}"> Kod pocztowy </span></td>
                 <td><a th:href="@{schools/{school}(school=${school.shortName})}">Przejdź</a></td>
             </tr>
-            </tbody>
+            </body>
         </table>
     </div>
 </div>

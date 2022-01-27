@@ -4,17 +4,61 @@
     box-sizing: border-box;
 }
 
-header {
-    position: relative;
+.container {
     height: 100vh;
     background-image: url(../images/taniec1.jpg);
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
-
 }
+
+.city-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 45vh;
+    height: 33vw;
+    position: relative;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.button{
+    position: absolute;
+    width: 30%;
+    margin-top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 4px;
+    background-color: #ed872d;
+    background-image: linear-gradient(to top left,
+    rgba(0, 0, 0, .2),
+    rgba(0, 0, 0, .2) 30%,
+    rgba(0, 0, 0, 0));
+    transition: .5s;
+}
+
+.button:hover {
+    background-color: #ff7518;
+}
+
+.button:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+    inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+
 
 
 header h1 {
@@ -31,32 +75,28 @@ header h1 {
 }
 
 
-label {
-    position: absolute;
-    bottom: 42%;
-    left: 50%;
-    transform: translateX(-50%);
+h2 {
+    text-align: center;
     font-size: 40px;
-    padding: 10px 50px;
-    font-family: roboto condensed, arial, sans-serif;
+    padding: 40px 50px;
     text-transform: uppercase;
     background-color: transparent;
     color: white;
 }
 
 input[type=text] {
-    position: absolute;
-    bottom: 30%;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: 40px;
+    text-align: center;
     padding: 10px 50px;
-    font-family: roboto condensed, arial, sans-serif;
     text-transform: uppercase;
     background-color: transparent;
     color: white;
     border: 4px solid white;
 
+}
+
+.input_field {
+    padding: 10px 0;
 }
 
 

@@ -15,8 +15,9 @@
     <div class="container">
     <div class="city-form">
         <form th:action="@{/schools}" method="get">
-            <label for="city">Podaj miasto:</label>
-            <input type="text" id="city" name="city" th:name="city" autofocus="autofocus"/> <br/>
+            <h2>Podaj miasto:</h2>
+            <input class="input_field" type="text" id="city" name="city" th:name="city" autofocus="autofocus"/> <br/>
+            <input class="button input_field" type="submit" value="WYSZUKAJ"/>
         </form>
     </div>
 </div>

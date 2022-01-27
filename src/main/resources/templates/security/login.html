@@ -3,17 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Zaloguj się</title>
+    <script src="https://kit.fontawesome.com/f7d482549e.js" crossorigin="anonymous"></script>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/login.css}" rel="stylesheet">
 </head>
 <body>
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+<div class="container">
+    <div class="form_wrapper">
     <h1>Logowanie do serwisu</h1>
     <p th:if="${loginError}">Nieprawidłowe dane logowania</p>
     <form th:action="@{/login}" method="post">
-        <label for="username">Nazwa Użytkownika</label>:
-        <input type="text" id="username" name="username" autofocus="autofocus"/> <br/>
-        <label for="password">Hasło</label>:
-        <input type="password" id="password" name="password"/> <br/>
-        <input type="submit" value="Zaloguj"/>
+        <div class="input_field"><span><i aria-hidden="true" class="fa fa-user"></i></span>
+            <input type="text" id="username" name="username" placeholder="Nazwa użytkownika"/>
+        </div>
+        <div class="input_field"><span><i aria-hidden="true" class="fa fa-lock"></i></span>
+            <input type="password" id="password" name="password" placeholder="Hasło" />
+            <br/>
+        </div>
+        <input class="button" type="submit" value="ZALOGUJ"/>
     </form>
+    </div>
+</div>
 
 </body>
 </html>
