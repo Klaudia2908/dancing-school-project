@@ -58,15 +58,15 @@ class AdministrationController {
 
     @GetMapping("/schools/add/existing/{schoolId}")
     String getAddAddressToExistingSchoolPage(@PathVariable Long schoolId, Model model) {
-        model.addAttribute("id", schoolId);
+        model.addAttribute("schoolId", schoolId);
         model.addAttribute("addAddressToExistingSchoolCommand", AddAddressToExistiongSchoolCommand.builder().build());
 
         return "administration/add-address-to-existing-school";
     }
 
     @PostMapping("/schools/add/existing/{id}")
-    String postAddAddressToExistingSchoolPage(@ModelAttribute AddAddressToExistiongSchoolCommand command, @PathVariable String id, Model model) {
-//        catalogApi.addNewSchool(addNewSchoolCommand);
+    String postAddAddressToExistingSchoolPage(@ModelAttribute AddAddressToExistiongSchoolCommand command, @PathVariable Long id, Model model) {
+        catalogApi.addNewAddressToExistingSchool(id, command);
 
         model.addAttribute("addedSuccesfully", true);
 

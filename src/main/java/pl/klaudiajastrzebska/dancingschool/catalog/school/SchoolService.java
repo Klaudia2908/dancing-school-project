@@ -2,6 +2,7 @@ package pl.klaudiajastrzebska.dancingschool.catalog.school;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import pl.klaudiajastrzebska.dancingschool.administration.dto.AddAddressToExistiongSchoolCommand;
 import pl.klaudiajastrzebska.dancingschool.administration.dto.AddNewSchoolCommand;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDefinitionDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
@@ -12,6 +13,7 @@ import pl.klaudiajastrzebska.dancingschool.catalog.school.mapper.SchoolMapper;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -62,5 +64,22 @@ public class SchoolService {
         entity.setDescription(command.getDescription());
 
         schoolRepository.save(entity);
+    }
+
+    public void addAddressToExistingSchoolId(Long schoolId, AddAddressToExistiongSchoolCommand command) {
+        SchoolEntity schoolEntity = schoolRepository.findById(schoolId)
+                .orElseThrow(() -> new IllegalArgumentException("Cannot find school for given id: " + schoolId));
+
+        SchoolAddressEntity schoolAddress = new SchoolAddressEntity();
+        schoolAddress.setCity(command.getCity());
+        schoolAddress.setCloseDate(null);
+        schoolAddress.setShortName(command.getShortName());
+        schoolAddress.setNumberOfTheBuilding(command.getNumberOfTheBuilding());
+        schoolAddress.setStreet(command.getStreet());
+        schoolAddress.setFlatNumber(command.getFlatNumber());
+        schoolAddress.setPostCode(command.getPostCode());
+        schoolAddress.setSchool(schoolEntity);
+
+        schoolAddressRepository.save(schoolAddress);
     }
 }
