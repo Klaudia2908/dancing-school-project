@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista szkół</title>
+    <base href="/">
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/administration/add-existing-school.css}" rel="stylesheet">
+</head>
+<body>
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+<div class="container">
+    <div class="screen-section grow-3">
+        <div class="schools-container">
+            <table>
+                <thead>
+                <tr>
+                    <th> Nazwa</th>
+                    <th> Opis</th>
+                    <th> </th>
+                </tr>
+                </thead>
+                <body>
+                <tr th:if="${schools.empty}">
+                    <td colspan="2"> Brak szkół do wyświetlenia</td>
+                </tr>
+                <tr th:each="school : ${schools}">
+                    <td><span th:text="${school.name}"> Nazwa </span></td>
+                    <td><span th:text="${school.description}"> Opis </span></td>
+                    <td><a th:href="@{/administration/schools/add/existing/{id}(id=${school.id})}">DODAJ ADRES</a></td>
+                </tr>
+                </body>
+            </table>
+        </div>
+    </div>
+    <div class="screen-section grow-1"></div>
+    <div class="screen-section grow-1"></div>
+</div>
+</body>
+</html>

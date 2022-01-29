@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Administrowanie</title>
+    <link th:href="@{/styles/administration/main.css}" rel="stylesheet">
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+</head>
+
+<body>
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+
+<div class="container">
+    <div class="screen-section grow-3">
+        <div class="buttons-container">
+            <a class="button" th:href="@{/administration/schools}">SZKOŁY</a>
+            <a class="button">PRACOWNICY</a>
+            <a class="button">KONTA</a>
+        </div>
+    </div>
+    <div class="screen-section grow-1"></div>
+    <div class="screen-section grow-1"></div>
+</div>
+</body>
+</html>

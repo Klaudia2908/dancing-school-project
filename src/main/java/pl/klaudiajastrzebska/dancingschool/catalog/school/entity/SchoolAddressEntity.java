@@ -3,6 +3,7 @@ package pl.klaudiajastrzebska.dancingschool.catalog.school.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -29,6 +30,9 @@ public class SchoolAddressEntity {
 
     @Column(name = "IDENTYFIKATOR")
     private String shortName;
+
+    @Column(name = "DATA_ZAMKNIECIA")
+    private LocalDateTime closeDate;
 
     @ManyToOne
     @JoinColumn(name = "ID_SZKOLY", referencedColumnName = "ID")

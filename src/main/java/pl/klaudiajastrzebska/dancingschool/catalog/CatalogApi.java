@@ -1,9 +1,11 @@
 package pl.klaudiajastrzebska.dancingschool.catalog;
 
 import lombok.RequiredArgsConstructor;
+import pl.klaudiajastrzebska.dancingschool.administration.dto.AddNewSchoolCommand;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.PersonService;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.AddNewPersonCommand;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.SchoolService;
+import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDefinitionDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
 
 import java.util.List;
@@ -21,7 +23,19 @@ public class CatalogApi {
         return schoolService.getSchoolsByCity(city);
     }
 
+    public List<SchoolDefinitionDto> getSchoolDefinitions() {
+        return schoolService.getSchoolDefinitions();
+    }
+
     public SchoolDto getSchoolByIdentifier(String schoolIdentifier) {
         return schoolService.getSchoolByIdentifier(schoolIdentifier);
+    }
+
+    public void addNewSchool(AddNewSchoolCommand command) {
+        schoolService.addNewSchool(command);
+    }
+
+    public void deleteSchoolByShortName(String schoolShortName) {
+        schoolService.deleteSchoolByShortName(schoolShortName);
     }
 }

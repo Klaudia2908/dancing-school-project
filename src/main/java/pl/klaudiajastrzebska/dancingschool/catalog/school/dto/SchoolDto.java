@@ -3,6 +3,8 @@ package pl.klaudiajastrzebska.dancingschool.catalog.school.dto;
 import lombok.Builder;
 import lombok.Value;
 
+import java.time.LocalDateTime;
+
 @Value
 @Builder
 public class SchoolDto {
@@ -14,4 +16,5 @@ public class SchoolDto {
     String postCode;
     String street;
     String shortName;
+    LocalDateTime closeDate;
 }

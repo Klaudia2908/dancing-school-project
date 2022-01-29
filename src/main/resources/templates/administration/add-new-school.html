@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj nową szkołę</title>
+    <base href="/">
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/administration/add-new-school.css}" rel="stylesheet">
+</head>
+<body>
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+<body>
+<div class="container">
+    <div class="screen-section grow-3 display-column">
+        <div class="form-container">
+            <h2>Wprowadź dane</h2>
+            <form th:action="@{/administration/schools/add/new}" th:object="${addNewSchoolCommand}" method="post" class="flex display-column">
+                <input class="form-input" type="text" placeholder="Nazwa szkoły" th:field="*{name}">
+                <textarea class="form-input" type="textarea" placeholder="Opis" rows="6" cols="50" th:field="*{description}"></textarea>
+                <input class="button" type="submit">
+            </form>
+        </div>
+    </div>
+    <div class="screen-section grow-1"></div>
+    <div class="screen-section grow-1"></div>
+</div>
+</body>
+
+</body>
+</html>

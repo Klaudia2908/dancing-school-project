@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Administruj Szkołami</title>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/administration/schools.css}" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div th:insert="navbar.html :: navbar"/>
+    </nav>
+    <div class="container">
+        <div class="screen-section grow-3">
+            <div class="schools-container">
+                <a class="add-school-button" th:href="@{/administration/schools/add}">DODAJ SZKOŁĘ</a>
+                <table>
+                    <thead>
+                    <tr>
+                        <th> Nazwa</th>
+                        <th> Opis</th>
+                        <th> Miejscowość</th>
+                        <th> Ulica</th>
+                        <th> Numer budynku</th>
+                        <th> Numer lokalu</th>
+                        <th> Kod pocztowy</th>
+                        <th> </th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    <body>
+                    <tr th:if="${schools.empty}">
+                        <td colspan="2"> Brak szkół do wyświetlenia</td>
+                    </tr>
+                    <tr th:each="school : ${schools}">
+                        <td><span th:text="${school.name}"> Nazwa </span></td>
+                        <td><span th:text="${school.description}"> Opis </span></td>
+                        <td><span th:text="${school.city}"> Miejscowość </span></td>
+                        <td><span th:text="${school.street}"> Ulica </span></td>
+                        <td><span th:text="${school.numberOfTheBuilding}"> Numer budynku </span></td>
+                        <td><span th:text="${school.flatNumber}"> Number lokalu </span></td>
+                        <td><span th:text="${school.postCode}"> Kod pocztowy </span></td>
+                        <td><a th:href="@{schools/edit/{school}(school=${school.shortName})}">EDYTUJ</a></td>
+                        <td><a class="delete" th:href="@{schools/delete/{school}(school=${school.shortName})}">USUŃ</a></td>
+                    </tr>
+                    </body>
+                </table>
+            </div>
+        </div>
+        <div class="screen-section grow-1"></div>
+        <div class="screen-section grow-1"></div>
+    </div>
+</body>
+</html>

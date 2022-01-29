@@ -14,6 +14,9 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
+                .antMatchers("/administration").hasAuthority("ADMIN")
+                .antMatchers("/administration/*").hasAuthority("ADMIN")
+
                 .antMatchers("/login").permitAll()
                 .antMatchers("/login-error").permitAll()
                 .antMatchers("/register").permitAll()
@@ -24,6 +27,7 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().permitAll()
+
                 .and()
                 .formLogin()
                 .loginPage("/login").loginProcessingUrl("/login")

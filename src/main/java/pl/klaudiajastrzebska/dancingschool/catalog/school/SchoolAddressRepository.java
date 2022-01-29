@@ -10,8 +10,14 @@ import java.util.Optional;
 public interface SchoolAddressRepository extends JpaRepository<SchoolAddressEntity, Long> {
     @Query(value = "SELECT * FROM ADRES_SZKOLY ADR_SZK " +
             "JOIN SZKOLY SZK ON SZK.ID = ADR_SZK.ID_SZKOLY " +
-            "WHERE UPPER(ADR_SZK.MIEJSCOWOSC) = UPPER(:city)", nativeQuery = true)
+            "WHERE UPPER(ADR_SZK.MIEJSCOWOSC) = UPPER(:city) " +
+            "AND NVL(ADR_SZK.DATA_ZAMKNIECIA, SYSDATE + 1) >= SYSDATE", nativeQuery = true)
     List<SchoolAddressEntity> findSchoolsByCity(String city);
+
+    @Query(value = "SELECT * FROM ADRES_SZKOLY ADR_SZK " +
+            "JOIN SZKOLY SZK ON SZK.ID = ADR_SZK.ID_SZKOLY " +
+            "AND NVL(ADR_SZK.DATA_ZAMKNIECIA, SYSDATE + 1) >= SYSDATE", nativeQuery = true)
+    List<SchoolAddressEntity> findAllActiveSchoolAddresses();
 
     @Query(value = "SELECT * FROM ADRES_SZKOLY ADR_SZK " +
             "JOIN SZKOLY SZK ON SZK.ID = ADR_SZK.ID_SZKOLY " +

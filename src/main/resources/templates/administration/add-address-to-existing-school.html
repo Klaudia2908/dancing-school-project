@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj nowy adres szkoły</title>
+    <base href="/">
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/administration/add-address-to-existing-school.css}" rel="stylesheet">
+<body>
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+<div class="container">
+    <div class="screen-section grow-3 display-column">
+        <div class="form-container">
+            <h2>Wprowadź dane</h2>
+            <form th:action="@{/administration/schools/add/existing/{id}}" th:object="${addAddressToExistingSchoolCommand}" method="post" class="flex display-column">
+                <input class="form-input" type="text" placeholder="Ulica" th:field="*{street}">
+                <input class="form-input" type="text" placeholder="Numer budynku" th:field="*{numberOfTheBuilding}">
+                <input class="form-input" type="text" placeholder="Numer lokalu" th:field="*{flatNumber}">
+                <input class="form-input" type="text" placeholder="Miejscowość" th:field="*{city}">
+                <input class="form-input" type="text" placeholder="Kod pocztowy" th:field="*{postCode}">
+                <input class="form-input" type="text" placeholder="Identyfikator" th:field="*{shortName}">
+                <input class="button" type="submit">
+            </form>
+        </div>
+    </div>
+    <div class="screen-section grow-1"></div>
+    <div class="screen-section grow-1"></div>
+</div>
+</body>
+</html>

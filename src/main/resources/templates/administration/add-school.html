@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj Szkołę</title>
+    <base href="/">
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/administration/main.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+
+<div class="container">
+    <div class="screen-section grow-3">
+        <div class="add-school-success-info" th:if="${addedSuccesfully}">
+            <p>Pomyślnie dodano informacje!</p>
+        </div>
+        <div class="buttons-container">
+            <a class="button" th:href="@{/administration/schools/add/new}">DODAJ NOWĄ SZKOŁĘ</a>
+            <a class="button" th:href="@{/administration/schools/add/existing}">DODAJ NOWY ADRES SZKOŁY</a>
+        </div>
+    </div>
+    <div class="screen-section grow-1"></div>
+    <div class="screen-section grow-1"></div>
+</div>
+
+</body>
+</html>

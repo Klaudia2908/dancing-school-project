@@ -21,11 +21,11 @@ INSERT INTO SZKOLY(ID, NAZWA, OPIS)
 VALUES (2, 'Fantastyczna Szkoła Pantofelek', 'Opis Fantastycznej Szkoły Pantofelek');
 
 --                                                                                                  szkoły adresy
-INSERT INTO ADRES_SZKOLY(ID, ULICA, NR_BUDYNKU, NR_LOKALU, MIEJSCOWOSC, KOD_POCZTOWY, ID_SZKOLY, IDENTYFIKATOR)
-VALUES (1, 'Chmielna', '1', '1', 'Warszawa', '02-646', 1,'rivierachmielna');
-INSERT INTO ADRES_SZKOLY(ID, ULICA, NR_BUDYNKU, NR_LOKALU, MIEJSCOWOSC, KOD_POCZTOWY, ID_SZKOLY, IDENTYFIKATOR)
-VALUES (2, 'Taneczna', '2', '2', 'Lublin', '03-222', 1,'rivierataneczna');
-INSERT INTO ADRES_SZKOLY(ID, ULICA, NR_BUDYNKU, NR_LOKALU, MIEJSCOWOSC, KOD_POCZTOWY, ID_SZKOLY, IDENTYFIKATOR)
-VALUES (3, 'Kwadratowa', '3', '3', 'Radom', '05-111', 2, 'pantofelekkwadratowa');
-INSERT INTO ADRES_SZKOLY(ID, ULICA, NR_BUDYNKU, NR_LOKALU, MIEJSCOWOSC, KOD_POCZTOWY, ID_SZKOLY, IDENTYFIKATOR)
-VALUES (4, 'Poetycka', '4', '4', 'Warszawa', '22-673', 2, 'pantofelekpoetycka');
+INSERT INTO ADRES_SZKOLY(ID, ULICA, NR_BUDYNKU, NR_LOKALU, MIEJSCOWOSC, KOD_POCZTOWY, ID_SZKOLY, IDENTYFIKATOR, DATA_ZAMKNIECIA)
+VALUES (1, 'Chmielna', '1', '1', 'Warszawa', '02-646', 1,'rivierachmielna', null);
+INSERT INTO ADRES_SZKOLY(ID, ULICA, NR_BUDYNKU, NR_LOKALU, MIEJSCOWOSC, KOD_POCZTOWY, ID_SZKOLY, IDENTYFIKATOR, DATA_ZAMKNIECIA)
+VALUES (2, 'Taneczna', '2', '2', 'Lublin', '03-222', 1,'rivierataneczna', null);
+INSERT INTO ADRES_SZKOLY(ID, ULICA, NR_BUDYNKU, NR_LOKALU, MIEJSCOWOSC, KOD_POCZTOWY, ID_SZKOLY, IDENTYFIKATOR, DATA_ZAMKNIECIA)
+VALUES (3, 'Kwadratowa', '3', '3', 'Radom', '05-111', 2, 'pantofelekkwadratowa', null);
+INSERT INTO ADRES_SZKOLY(ID, ULICA, NR_BUDYNKU, NR_LOKALU, MIEJSCOWOSC, KOD_POCZTOWY, ID_SZKOLY, IDENTYFIKATOR, DATA_ZAMKNIECIA)
+VALUES (4, 'Poetycka', '4', '4', 'Warszawa', '22-673', 2, 'pantofelekpoetycka', null);
