@@ -5,7 +5,7 @@
     <title>Dodaj nową szkołę</title>
     <base href="/">
     <link th:href="@{/styles/navbar.css}" rel="stylesheet">
-    <link th:href="@{/styles/administration/add-new-school.css}" rel="stylesheet">
+    <link th:href="@{/styles/administration/school/add-new-school.css}" rel="stylesheet">
 </head>
 <body>
 <nav>
@@ -17,8 +17,18 @@
         <div class="form-container">
             <h2>Wprowadź dane</h2>
             <form th:action="@{/administration/schools/add/new}" th:object="${addNewSchoolCommand}" method="post" class="flex display-column">
+
                 <input class="form-input" type="text" placeholder="Nazwa szkoły" th:field="*{name}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == name" th:text="${validationError.message}"></p>
+                </div>
+
                 <textarea class="form-input" type="textarea" placeholder="Opis" rows="6" cols="50" th:field="*{description}"></textarea>
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == description" th:text="${validationError.message}"></p>
+                </div>
+                <br />
+
                 <input class="button" type="submit">
             </form>
         </div>

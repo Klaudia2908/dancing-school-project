@@ -1,8 +1,9 @@
 package pl.klaudiajastrzebska.dancingschool.catalog;
 
 import lombok.RequiredArgsConstructor;
-import pl.klaudiajastrzebska.dancingschool.administration.dto.AddAddressToExistiongSchoolCommand;
-import pl.klaudiajastrzebska.dancingschool.administration.dto.AddNewSchoolCommand;
+import pl.klaudiajastrzebska.dancingschool.administration.school.dto.AddAddressToExistiongSchoolCommand;
+import pl.klaudiajastrzebska.dancingschool.administration.school.dto.AddNewSchoolCommand;
+import pl.klaudiajastrzebska.dancingschool.administration.school.dto.EditSchoolDataCommand;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.PersonService;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.AddNewPersonCommand;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.SchoolService;
@@ -42,5 +43,9 @@ public class CatalogApi {
 
     public void deleteSchoolByShortName(String schoolShortName) {
         schoolService.deleteSchoolByShortName(schoolShortName);
+    }
+
+    public void editSchoolData(EditSchoolDataCommand editSchoolDataCommand, String schoolIdentifier) {
+        schoolService.editSchoolData(editSchoolDataCommand, schoolIdentifier);
     }
 }

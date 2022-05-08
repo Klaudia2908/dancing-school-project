@@ -7,6 +7,7 @@ import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.AddNewPersonComman
 import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.PersonType;
 import pl.klaudiajastrzebska.dancingschool.security.entity.UserEntity;
 import pl.klaudiajastrzebska.dancingschool.security.entity.UserRolesEntity;
+import pl.klaudiajastrzebska.dancingschool.validaton.ValidationService;
 
 @RequiredArgsConstructor
 class RegistrationService {
@@ -15,9 +16,12 @@ class RegistrationService {
     private final UserRepository userRepository;
     private final UserRolesRepository userRolesRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ValidationService validationService;
     private final CatalogApi catalogApi;
 
     void registerCommonUser(RegisterCommand registerCommand) {
+        validationService.validate(registerCommand);
+
         UserEntity userEntity = prepareCommonUserEntity(registerCommand);
 
         UserEntity savedUserEntity = userRepository.save(userEntity);

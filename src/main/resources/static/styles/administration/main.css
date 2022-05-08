@@ -27,6 +27,13 @@
     background-color: darkgreen;
 }
 
+.edit-school-success-info {
+    border-radius: 5px;
+    color: white;
+    padding: 10px 10px;
+    background-color: darkgreen;
+}
+
 .screen-section {
     align-items: center;
     justify-content: center;

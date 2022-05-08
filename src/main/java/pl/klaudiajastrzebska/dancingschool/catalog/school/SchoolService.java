@@ -2,13 +2,15 @@ package pl.klaudiajastrzebska.dancingschool.catalog.school;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import pl.klaudiajastrzebska.dancingschool.administration.dto.AddAddressToExistiongSchoolCommand;
-import pl.klaudiajastrzebska.dancingschool.administration.dto.AddNewSchoolCommand;
+import pl.klaudiajastrzebska.dancingschool.administration.school.dto.AddAddressToExistiongSchoolCommand;
+import pl.klaudiajastrzebska.dancingschool.administration.school.dto.AddNewSchoolCommand;
+import pl.klaudiajastrzebska.dancingschool.administration.school.dto.EditSchoolDataCommand;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDefinitionDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.entity.SchoolAddressEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.entity.SchoolEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.mapper.SchoolMapper;
+import pl.klaudiajastrzebska.dancingschool.validaton.ValidationService;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 public class SchoolService {
     private final SchoolAddressRepository schoolAddressRepository;
     private final SchoolRepository schoolRepository;
+    private final ValidationService validationService;
 
     public List<SchoolDto> getSchoolsByCity(String city) {
         if (StringUtils.isBlank(city)) {
@@ -59,6 +62,7 @@ public class SchoolService {
     }
 
     public void addNewSchool(AddNewSchoolCommand command) {
+        validationService.validate(command);
         SchoolEntity entity = new SchoolEntity();
         entity.setName(command.getName());
         entity.setDescription(command.getDescription());
@@ -67,6 +71,7 @@ public class SchoolService {
     }
 
     public void addAddressToExistingSchoolId(Long schoolId, AddAddressToExistiongSchoolCommand command) {
+        validationService.validate(command);
         SchoolEntity schoolEntity = schoolRepository.findById(schoolId)
                 .orElseThrow(() -> new IllegalArgumentException("Cannot find school for given id: " + schoolId));
 
@@ -81,5 +86,28 @@ public class SchoolService {
         schoolAddress.setSchool(schoolEntity);
 
         schoolAddressRepository.save(schoolAddress);
+    }
+
+    @Transactional
+    public void editSchoolData(EditSchoolDataCommand editSchoolDataCommand, String schoolIdentifier) {
+        validationService.validate(editSchoolDataCommand);
+
+        SchoolAddressEntity schoolAddressEntity = schoolAddressRepository.findSchoolByIdentifier(schoolIdentifier).get();
+        SchoolEntity schoolEntity = schoolAddressEntity.getSchool();
+
+        schoolEntity.setName(editSchoolDataCommand.getName());
+        schoolEntity.setDescription(editSchoolDataCommand.getDescription());
+
+        schoolRepository.save(schoolEntity);
+
+        schoolAddressEntity.setCity(editSchoolDataCommand.getCity());
+        schoolAddressEntity.setShortName(editSchoolDataCommand.getShortName());
+        schoolAddressEntity.setNumberOfTheBuilding(editSchoolDataCommand.getNumberOfTheBuilding());
+        schoolAddressEntity.setStreet(editSchoolDataCommand.getStreet());
+        schoolAddressEntity.setFlatNumber(editSchoolDataCommand.getFlatNumber());
+        schoolAddressEntity.setPostCode(editSchoolDataCommand.getPostCode());
+        schoolAddressEntity.setSchool(schoolEntity);
+
+        schoolAddressRepository.save(schoolAddressEntity);
     }
 }

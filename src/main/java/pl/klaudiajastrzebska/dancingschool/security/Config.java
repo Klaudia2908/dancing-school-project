@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.klaudiajastrzebska.dancingschool.catalog.CatalogApi;
+import pl.klaudiajastrzebska.dancingschool.validaton.ValidationService;
 
 @Configuration("securityConfig")
 class Config {
@@ -24,8 +25,9 @@ class Config {
     RegistrationService registrationService(UserRepository userRepository,
                                             UserRolesRepository userRolesRepository,
                                             PasswordEncoder encoder,
-                                            CatalogApi catalogApi){
-        return new RegistrationService(userRepository, userRolesRepository, encoder, catalogApi);
+                                            CatalogApi catalogApi,
+                                            ValidationService validationService){
+        return new RegistrationService(userRepository, userRolesRepository, encoder,validationService, catalogApi);
     }
 
     @Bean

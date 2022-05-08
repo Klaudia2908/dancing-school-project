@@ -15,6 +15,7 @@ public class SchoolEntity {
     @Column(name = "NAZWA")
     private String name;
 
+    @Lob
     @Column(name = "OPIS")
     private String description;
 }

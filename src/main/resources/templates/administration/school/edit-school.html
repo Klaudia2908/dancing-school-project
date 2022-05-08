@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edytuj szkołę</title>
+    <base href="/">
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/administration/school/edit-school.css}" rel="stylesheet">
+</head>
+<body>
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+<div class="container">
+    <div class="screen-section grow-3 display-column">
+        <div class="form-container">
+            <h2>Wprowadź dane</h2>
+            <form th:action="@{/administration/schools/edit/{schoolIdentifier}(schoolIdentifier=${schoolIdentifier})}"
+                  th:object="${editSchoolDataCommand}" method="post" class="flex display-column">
+                <input class="form-input" type="text" placeholder="Nazwa" th:field="*{name}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == name" th:text="${validationError.message}"></p>
+                </div>
+
+                <input class="form-input" type="text" placeholder="Opis" th:field="*{description}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == description" th:text="${validationError.message}"></p>
+                </div>
+
+                <input class="form-input" type="text" placeholder="Ulica" th:field="*{street}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == street" th:text="${validationError.message}"></p>
+                </div>
+
+                <input class="form-input" type="text" placeholder="Numer budynku" th:field="*{numberOfTheBuilding}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == numberOfTheBuilding" th:text="${validationError.message}"></p>
+                </div>
+
+                <input class="form-input" type="text" placeholder="Numer lokalu" th:field="*{flatNumber}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == flatNumber" th:text="${validationError.message}"></p>
+                </div>
+
+                <input class="form-input" type="text" placeholder="Miejscowość" th:field="*{city}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == city" th:text="${validationError.message}"></p>
+                </div>
+
+                <input class="form-input" type="text" placeholder="Kod pocztowy" th:field="*{postCode}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == postCode" th:text="${validationError.message}"></p>
+                </div>
+
+                <input class="form-input" type="text" placeholder="Identyfikator" th:field="*{shortName}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == shortName" th:text="${validationError.message}"></p>
+                </div>
+                <br />
+                <input class="button" type="submit">
+            </form>
+        </div>
+    </div>
+    <div class="screen-section grow-1"></div>
+    <div class="screen-section grow-1"></div>
+</div>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package pl.klaudiajastrzebska.dancingschool.security;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -9,9 +10,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.klaudiajastrzebska.dancingschool.security.dto.UserDto;
+import pl.klaudiajastrzebska.dancingschool.security.exception.ObtainUserDataException;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 class CustomAuthenticationProvider implements AuthenticationProvider {
     private final SecurityService securityService;
@@ -22,13 +25,17 @@ class CustomAuthenticationProvider implements AuthenticationProvider {
         String login = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        UserDto userDto = securityService.getUser(login);
+        try{
+            UserDto userDto = securityService.getUser(login);
+            if(!passwordEncoder.matches(password, userDto.getPassword())){
+                return null;
+            }
+            return new UsernamePasswordAuthenticationToken(userDto.getLogin(), userDto.getPassword(), mapToAuthority(userDto.getRole().getName()));
 
-        if(!passwordEncoder.matches(password, userDto.getPassword())){
+        } catch (ObtainUserDataException e){
+            log.error("Niepoprawne dane logowania dla user: " + login);
             return null;
         }
-
-        return new UsernamePasswordAuthenticationToken(userDto.getLogin(), userDto.getPassword(), mapToAuthority(userDto.getRole().getName()));
     }
 
     private List<GrantedAuthority> mapToAuthority(String role) {
