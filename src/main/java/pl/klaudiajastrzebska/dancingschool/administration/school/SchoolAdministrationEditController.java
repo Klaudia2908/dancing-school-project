@@ -20,21 +20,19 @@ class SchoolAdministrationEditController {
     private static final String ALL_SCHOOLS_STRING = "";
     private final CatalogApi catalogApi;
 
-    @GetMapping("schools/edit/{schoolIdentifier}")
+    @GetMapping("/schools/edit/{schoolIdentifier}")
     String getEditSchoolScreen(Model model, @PathVariable String schoolIdentifier) {
         model.addAttribute("editSchoolDataCommand", prepareEditSchoolDataCommandForOnScreenPresentation(schoolIdentifier));
 
         return "administration/school/edit-school";
     }
 
-    @PostMapping("schools/edit/{schoolIdentifier}")
+    @PostMapping("/schools/edit/{schoolIdentifier}")
     String postEditSchoolDataForm(@ModelAttribute EditSchoolDataCommand editSchoolDataCommand, @PathVariable String schoolIdentifier, Model model) {
         catalogApi.editSchoolData(editSchoolDataCommand, schoolIdentifier);
-
         model.addAttribute("editedSuccesfully", true);
-        model.addAttribute("schools", catalogApi.getSchoolsByCity(ALL_SCHOOLS_STRING));
 
-        return "administration/school/schools";
+        return "redirect:/administration/schools";
     }
 
     @ResponseStatus(HttpStatus.OK)

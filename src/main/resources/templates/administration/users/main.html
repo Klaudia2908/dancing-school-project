@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Administruj Użytkownikami</title>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/administration/users/main.css}" rel="stylesheet">
+</head>
+<body>
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+<div class="container">
+    <div class="screen-section grow-3">
+        <div class="users-container">
+            <table style="width: 100%">
+                <thead>
+                <tr>
+                    <th> Login</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <body>
+                <tr th:if="${users.empty}">
+                    <td colspan="2"> Brak aktywnych użytkowników w systemie</td>
+                </tr>
+                <tr th:each="user : ${users}">
+                    <td><span th:text="${user.login}"> Login </span></td>
+
+                    <td><a class="delete" th:href="@{users/delete/{login}(login=${user.login})}">USUŃ</a></td>
+                </tr>
+                </body>
+            </table>
+        </div>
+    </div>
+    <div class="screen-section grow-1"></div>
+    <div class="screen-section grow-1"></div>
+</div>
+</body>
+</html>

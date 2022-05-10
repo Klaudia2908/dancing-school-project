@@ -6,14 +6,18 @@ import pl.klaudiajastrzebska.dancingschool.security.entity.UserEntity;
 import pl.klaudiajastrzebska.dancingschool.security.exception.ObtainUserDataException;
 import pl.klaudiajastrzebska.dancingschool.security.mapper.UserMapper;
 
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-class SecurityService {
+public class SecurityService {
     private final UserRepository userRepository;
 
-    UserDto getUser(String login) {
-        Optional<UserEntity> userEntityOptional = userRepository.findByLogin(login);
+    public UserDto getUser(String login) {
+        Optional<UserEntity> userEntityOptional = userRepository.findByLoginAndRemovalDateNull(login);
 
         if (userEntityOptional.isEmpty()) {
             throw new ObtainUserDataException("Użytkownik " + login + " nie istnieje.");
@@ -22,5 +26,18 @@ class SecurityService {
         UserEntity userEntity = userEntityOptional.get();
 
         return UserMapper.mapToDto(userEntity);
+    }
+
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAllActiveUsers("USER")
+                .stream()
+                .map(UserMapper::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void deleteUser(String userLogin) {
+        UserEntity user = userRepository.findByLoginAndRemovalDateNull(userLogin).get();
+        user.setRemovalDate(LocalDateTime.now());
     }
 }

@@ -3,6 +3,7 @@ package pl.klaudiajastrzebska.dancingschool.security.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -17,6 +18,9 @@ public class UserEntity {
 
     @Column(name = "HASLO")
     private String password;
+
+    @Column(name = "DATA_USUNIECIA")
+    private LocalDateTime removalDate;
 
     @ManyToOne
     @JoinColumn(name = "ID_S_UPRAWNIENIA", referencedColumnName = "ID")

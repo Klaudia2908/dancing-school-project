@@ -9,12 +9,15 @@ import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.AddNewPersonComman
 import pl.klaudiajastrzebska.dancingschool.catalog.school.SchoolService;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDefinitionDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
+import pl.klaudiajastrzebska.dancingschool.security.SecurityService;
+import pl.klaudiajastrzebska.dancingschool.security.dto.UserDto;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 public class CatalogApi {
     private final PersonService personService;
+    private final SecurityService securityService;
     private final SchoolService schoolService;
 
     public void addNewPerson(AddNewPersonCommand command) {
@@ -47,5 +50,13 @@ public class CatalogApi {
 
     public void editSchoolData(EditSchoolDataCommand editSchoolDataCommand, String schoolIdentifier) {
         schoolService.editSchoolData(editSchoolDataCommand, schoolIdentifier);
+    }
+
+    public Object getAllUsers() {
+        return securityService.getAllUsers();
+    }
+
+    public void deleteUser(String userLogin) {
+        securityService.deleteUser(userLogin);
     }
 }

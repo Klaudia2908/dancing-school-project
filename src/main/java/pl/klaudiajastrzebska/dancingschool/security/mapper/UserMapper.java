@@ -13,6 +13,7 @@ public class UserMapper {
                 .login(entity.getLogin())
                 .password(entity.getPassword())
                 .role(mapToDto(entity.getRole()))
+                .removalDate(entity.getRemovalDate())
                 .build();
     }
 

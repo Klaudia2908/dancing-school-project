@@ -13,6 +13,7 @@ import pl.klaudiajastrzebska.dancingschool.security.dto.UserDto;
 import pl.klaudiajastrzebska.dancingschool.security.exception.ObtainUserDataException;
 
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -30,6 +31,11 @@ class CustomAuthenticationProvider implements AuthenticationProvider {
             if(!passwordEncoder.matches(password, userDto.getPassword())){
                 return null;
             }
+
+            if(Objects.nonNull(userDto.getRemovalDate())){
+                return null;
+            }
+
             return new UsernamePasswordAuthenticationToken(userDto.getLogin(), userDto.getPassword(), mapToAuthority(userDto.getRole().getName()));
 
         } catch (ObtainUserDataException e){
