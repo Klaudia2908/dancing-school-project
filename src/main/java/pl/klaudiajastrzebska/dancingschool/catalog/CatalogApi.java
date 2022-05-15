@@ -1,27 +1,29 @@
 package pl.klaudiajastrzebska.dancingschool.catalog;
 
 import lombok.RequiredArgsConstructor;
+import pl.klaudiajastrzebska.dancingschool.administration.employees.dto.CreateEmployeeRequest;
 import pl.klaudiajastrzebska.dancingschool.administration.school.dto.AddAddressToExistiongSchoolCommand;
 import pl.klaudiajastrzebska.dancingschool.administration.school.dto.AddNewSchoolCommand;
 import pl.klaudiajastrzebska.dancingschool.administration.school.dto.EditSchoolDataCommand;
-import pl.klaudiajastrzebska.dancingschool.catalog.person.PersonService;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.EmployeeUserService;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.AddNewPersonCommand;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.EmployeeDto;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.PersonDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.SchoolService;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDefinitionDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
 import pl.klaudiajastrzebska.dancingschool.security.SecurityService;
-import pl.klaudiajastrzebska.dancingschool.security.dto.UserDto;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 public class CatalogApi {
-    private final PersonService personService;
+    private final EmployeeUserService employeeUserService;
     private final SecurityService securityService;
     private final SchoolService schoolService;
 
     public void addNewPerson(AddNewPersonCommand command) {
-        personService.addNewPerson(command);
+        employeeUserService.addNewPerson(command);
     }
 
     public List<SchoolDto> getSchoolsByCity(String city) {
@@ -58,5 +60,21 @@ public class CatalogApi {
 
     public void deleteUser(String userLogin) {
         securityService.deleteUser(userLogin);
+    }
+
+    public List<EmployeeDto> getAllEmployees() {
+        return employeeUserService.getAllEmployees();
+    }
+
+    public void createNewEmployee(CreateEmployeeRequest request) {
+        employeeUserService.createEmployee(request);
+    }
+
+    public List<PersonDto> getAllEmployeesWithoutAttachedSchool() {
+        return employeeUserService.getAllEmployeesWithoutAttachedSchool();
+    }
+
+    public List<SchoolDto> getNotAttachedSchoolsForLogin(String employeeLogin) {
+        return schoolService.getSchoolsAvailableForAttachingForLogin(employeeLogin);
     }
 }

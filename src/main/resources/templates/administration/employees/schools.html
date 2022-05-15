@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <title>Administruj Użytkownikami</title>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/administration/employees/schools.css}" rel="stylesheet">
+</head>
+<body>
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+<div class="container">
+    <div class="screen-section grow-3">
+        <h2>Dostępne szkoły</h2>
+        <br/>
+        <div class="employees-container">
+            <table style="width: 100%">
+                <thead>
+                <tr>
+                    <th> Nazwa</th>
+                    <th> Opis</th>
+                    <th> Miejscowość</th>
+                    <th> Ulica</th>
+                    <th> Numer budynku</th>
+                    <th> Numer lokalu</th>
+                    <th> Kod pocztowy</th>
+                    <th> Identyfikator systemowy</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <body>
+                <tr th:if="${availableSchools.empty}">
+                    <td colspan="2"> Brak dostępnych szkół</td>
+                </tr>
+                <tr th:each="school : ${availableSchools}">
+                    <td><span th:text="${school.name}"> Login </span></td>
+                    <td><span th:text="${school.description}"> Login </span></td>
+                    <td><span th:text="${school.city}"> Login </span></td>
+                    <td><span th:text="${school.street}"> Login </span></td>
+                    <td><span th:text="${school.numberOfTheBuilding}"> Login </span></td>
+                    <td><span th:text="${school.flatNumber}"> Login </span></td>
+                    <td><span th:text="${school.postCode}"> Login </span></td>
+                    <td><span th:text="${school.shortName}"> Login </span></td>
+                    <td><a class="attach" th:href="@{employees/attach/{login}/{identifier}(login=${login})(identifier=${school.shortName})}">PRZYPISZ</a></td>
+                </tr>
+                </body>
+            </table>
+        </div>
+    </div>
+    <div class="screen-section grow-1"></div>
+    <div class="screen-section grow-1"></div>
+</div>
+</body>
+</html>

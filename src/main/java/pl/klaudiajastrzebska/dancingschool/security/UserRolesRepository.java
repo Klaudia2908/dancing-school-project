@@ -5,6 +5,6 @@ import pl.klaudiajastrzebska.dancingschool.security.entity.UserRolesEntity;
 
 import java.util.Optional;
 
-interface UserRolesRepository extends JpaRepository<UserRolesEntity, Long> {
+public interface UserRolesRepository extends JpaRepository<UserRolesEntity, Long> {
     Optional<UserRolesEntity> findByName(String name);
 }

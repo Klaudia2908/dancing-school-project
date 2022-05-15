@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj nowego pracownika</title>
+    <base href="/">
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/administration/employees/new.css}" rel="stylesheet">
+</head>
+<body>
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+<body>
+<div class="container">
+    <div class="screen-section grow-3 display-column">
+        <div class="form-container">
+            <h2>Wprowadź dane</h2>
+            <form th:action="@{/administration/employees/new}" th:object="${createEmployeeRequest}" method="post"
+                  class="flex display-column">
+
+                <input class="form-input" type="text" placeholder="Login Pracownika" th:field="*{login}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == login"
+                       th:text="${validationError.message}"></p>
+                </div>
+
+                <input class="form-input" type="text" placeholder="Imię" th:field="*{firstName}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == firstName"
+                       th:text="${validationError.message}"></p>
+                </div>
+
+                <input class="form-input" type="text" placeholder="Nazwisko" th:field="*{lastName}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == lastName"
+                       th:text="${validationError.message}"></p>
+                </div>
+
+                <input type="date" id="birthDate" name="lastName" placeholder="Data urodzenia"  th:field="*{birthDate}"/>
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == birthDate"
+                       th:text="${validationError.message}"></p>
+                </div>
+                <br/>
+
+                <div class="input_field radio_option">
+                    <input type="radio" id="male" name="gender" th:value="mężczyzna" th:field="*{gender}"/>
+                    <label for="male">Mężczyzna</label>
+                    <input type="radio" id="female" name="gender" th:value="kobieta" th:field="*{gender}"/>
+                    <label for="female">Kobieta</label>
+                </div>
+
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == gender" th:text="${validationError.message}"></p>
+                </div>
+
+                <br/>
+                <input class="button" type="submit">
+            </form>
+        </div>
+    </div>
+    <div class="screen-section grow-1"></div>
+    <div class="screen-section grow-1"></div>
+</div>
+</body>
+
+</body>
+</html>

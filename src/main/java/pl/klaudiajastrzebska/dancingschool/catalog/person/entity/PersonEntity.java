@@ -1,6 +1,9 @@
 package pl.klaudiajastrzebska.dancingschool.catalog.person.entity;
 
+import lombok.Builder;
 import lombok.Data;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.PersonDto;
+import pl.klaudiajastrzebska.dancingschool.security.entity.UserEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -23,10 +26,23 @@ public class PersonEntity {
     private String gender;
     @Column(name = "OPIS")
     private String description;
-    @Column(name = "ID_USER")
-    private long userId;
+
+    @OneToOne
+    @JoinColumn(name = "ID_USER", referencedColumnName = "ID")
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "ID_TYP_OSOBY", referencedColumnName = "ID")
     private PersonTypeEntity personType;
+
+    public PersonDto toDto(){
+        return PersonDto
+                .builder()
+                .login(getUser().getLogin())
+                .firstName(firstName)
+                .lastName(lastName)
+                .description(description)
+                .gender(gender)
+                .build();
+    }
 }

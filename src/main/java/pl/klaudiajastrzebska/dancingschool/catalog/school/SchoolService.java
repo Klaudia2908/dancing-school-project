@@ -110,4 +110,11 @@ public class SchoolService {
 
         schoolAddressRepository.save(schoolAddressEntity);
     }
+
+    public List<SchoolDto> getSchoolsAvailableForAttachingForLogin(String employeeLogin) {
+        return schoolAddressRepository.findAllAddressesAvailableForAttachingForLogin(employeeLogin)
+                .stream()
+                .map(SchoolMapper::mapToDto)
+                .toList();
+    }
 }

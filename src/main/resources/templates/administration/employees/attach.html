@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <title>Administruj Użytkownikami</title>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/administration/employees/attach.css}" rel="stylesheet">
+</head>
+<body>
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+<div class="container">
+    <div class="screen-section grow-3">
+        <h2>Pracownicy bez przypisanej szkoły</h2>
+        <br/>
+        <div class="employees-container">
+            <table style="width: 100%">
+                <thead>
+                <tr>
+                    <th> Login</th>
+                    <th> Imię</th>
+                    <th> Nazwisko</th>
+                    <th> Płeć</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <body>
+                <tr th:if="${employeesWithoutAttachedSchool.empty}">
+                    <td colspan="2"> Brak pracowników bez przypisanej szkoły</td>
+                </tr>
+                <tr th:each="employee : ${employeesWithoutAttachedSchool}">
+                    <td><span th:text="${employee.login}"> Login </span></td>
+                    <td><span th:text="${employee.firstName}"> Login </span></td>
+                    <td><span th:text="${employee.lastName}"> Login </span></td>
+                    <td><span th:text="${employee.gender}"> Login </span></td>
+                    <td><a class="attach" th:href="@{administration/employees/attach/{login}(login=${employee.login})}">PRZYPISZ</a></td>
+                </tr>
+                </body>
+            </table>
+        </div>
+    </div>
+    <div class="screen-section grow-3">
+        <h2>Pracownicy posiadający przypisaną szkołę</h2>
+        <br/>
+        <div class="employees-container">
+            <table style="width: 100%">
+                <thead>
+                <tr>
+                    <th> Login</th>
+                    <th> Imię</th>
+                    <th> Nazwisko</th>
+                    <th> Płeć</th>
+                    <th> Dane szkoły</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <body>
+                <tr th:if="${employeesWithSchools.empty}">
+                    <td colspan="2"> Brak aktywnych pracowników w systemie</td>
+                </tr>
+                <tr th:each="employee : ${employeesWithSchools}">
+                    <td><span th:text="${employee.login}"> Login </span></td>
+                    <td><span th:text="${employee.firstName}"> Login </span></td>
+                    <td><span th:text="${employee.lastName}"> Login </span></td>
+                    <td><span th:text="${employee.gender}"> Login </span></td>
+                    <td><span th:text="${employee.schoolNameAndAddress}"> Login </span></td>
+                    <td><a class="attach" th:href="@{administration/employees/attach/{login}(login=${employee.login})}">PRZYPISZ</a></td>
+                </tr>
+                </body>
+            </table>
+        </div>
+    </div>
+    <div class="screen-section grow-1"></div>
+</div>
+</body>
+</html>

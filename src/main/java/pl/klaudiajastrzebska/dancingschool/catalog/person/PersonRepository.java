@@ -1,7 +1,17 @@
 package pl.klaudiajastrzebska.dancingschool.catalog.person;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonEntity;
 
+import java.util.List;
+import java.util.Optional;
+
 interface PersonRepository extends JpaRepository<PersonEntity, Long> {
+    @Query(value = "select * from osoby os " +
+            "join S_TYP_OSOBY typ_os on typ_os.id = os.ID_TYP_OSOBY " +
+            "left join SZKOLY_PRACOWNICY szk_prac on szk_prac.id_pracownika = os.id " +
+            "where typ_os.nazwa ='EMPLOYEE' " +
+            "and szk_prac.id_pracownika is null", nativeQuery = true)
+    List<PersonEntity> findAllEmployeesWithoutSchool();
 }

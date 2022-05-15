@@ -7,7 +7,7 @@ import pl.klaudiajastrzebska.dancingschool.security.entity.UserEntity;
 import java.util.List;
 import java.util.Optional;
 
-interface UserRepository extends JpaRepository<UserEntity, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
     Optional<UserEntity> findByLoginAndRemovalDateNull(String login);
 
     @Query(value = "SELECT * FROM USERS US " +
