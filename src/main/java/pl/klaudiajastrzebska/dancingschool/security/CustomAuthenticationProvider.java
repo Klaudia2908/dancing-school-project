@@ -9,6 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.context.annotation.SessionScope;
 import pl.klaudiajastrzebska.dancingschool.security.dto.UserDto;
 import pl.klaudiajastrzebska.dancingschool.security.exception.ObtainUserDataException;
 

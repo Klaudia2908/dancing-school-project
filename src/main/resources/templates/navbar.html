@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"s>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <title>Navbar</title>
@@ -11,7 +11,7 @@
             <div class="navbar-wrapper">
                 <div class="logo-container">
                     <div class="logo">
-                        <a th:href="@{/home}"><img src="../images/logo_portal2.png" title="logo" alt="logo"></a>
+                        <a th:href="@{/home}"><img th:src="@{/images/logo_portal2.png}" title="logo" alt="logo"></a>
                     </div>
                 </div>
                <div class="menu-container">
@@ -21,6 +21,12 @@
 
                            <li><a th:href="@{/register}" >Rejestracja</a></li>
 
+                       </ul>
+                   </div>
+
+                   <div sec:authorize="hasAuthority('EMPLOYEE')">
+                       <ul class="menu-list">
+                           <li>  <a th:href="@{/my-schools}" >Moje szkoły</a></li>
                        </ul>
                    </div>
 

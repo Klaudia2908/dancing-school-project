@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zarządzaj kursami</title>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/catalog/courses/main.css}" rel="stylesheet">
+</head>
+<body>
+    <div th:insert="navbar.html :: navbar"/>
+
+    <div class="container">
+        <div class="screen-section grow-3">
+            <div class="courses-container">
+                <a class="add-course-button" th:href="@{/{schoolIdentifier}/courses/add(schoolIdentifier=${schoolIdentifier})}">DODAJ KURS</a>
+                <table>
+                    <thead>
+                    <tr>
+                        <th> Nazwa</th>
+                        <th> Opis</th>
+                        <th> Cena</th>
+                        <th> Poziom Zaawansowania</th>
+                        <th> Styl Taneczny</th>
+                        <th> Adres Szkoły</th>
+                        <th> </th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    <body>
+                    <tr th:if="${courses.empty}">
+                        <td colspan="2"> Brak kursów do wyświetlenia</td>
+                    </tr>
+                    <tr th:each="course : ${courses}">
+                        <td><span th:text="${course.name}"> Nazwa </span></td>
+                        <td><span th:text="${course.description}"> Opis </span></td>
+                        <td><span th:text="${course.price}"> Miejscowość </span></td>
+                        <td><span th:text="${course.level}"> Ulica </span></td>
+                        <td><span th:text="${course.style}"> Numer budynku </span></td>
+                        <td><span th:text="${course.address}"> Number lokalu </span></td>
+                        <td><a th:href="@{/{schoolIdentifier}/course/{courseId}/edit(schoolIdentifier=${schoolIdentifier})}">EDYTUJ</a></td>
+                        <td><a class="delete" th:href="@{/{schoolIdentifier}/course/{courseId}/delete(schoolIdentifier=${schoolIdentifier})}">USUŃ</a></td>
+                    </tr>
+                    </body>
+                </table>
+            </div>
+        </div>
+        <div class="screen-section grow-1"></div>
+        <div class="screen-section grow-1"></div>
+    </div>
+</body>
+</html>

@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import pl.klaudiajastrzebska.dancingschool.administration.school.dto.AddAddressToExistiongSchoolCommand;
 import pl.klaudiajastrzebska.dancingschool.administration.school.dto.AddNewSchoolCommand;
 import pl.klaudiajastrzebska.dancingschool.administration.school.dto.EditSchoolDataCommand;
+import pl.klaudiajastrzebska.dancingschool.catalog.CatalogApi;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.EmployeeUserService;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDefinitionDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.entity.SchoolAddressEntity;

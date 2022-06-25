@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.klaudiajastrzebska.dancingschool.security.ApiUrlMappings;
 
+import java.security.Principal;
+import java.util.Objects;
+
 @Controller
 @RequiredArgsConstructor
 class CatalogController {
@@ -21,10 +24,13 @@ class CatalogController {
     }
 
     @GetMapping(ApiUrlMappings.SINGLE_SCHOOL_SCREEN)
-    String schoolInfo(@PathVariable String schoolIdentifier, Model model) {
+    String schoolInfo(@PathVariable String schoolIdentifier, Model model, Principal principal) {
         model.addAttribute("school", catalogApi.getSchoolByIdentifier(schoolIdentifier));
+
+        if(Objects.nonNull(principal)){
+            model.addAttribute("employeeAllowedToAddSchedule", catalogApi.isUserAllowedToAddSchedule(schoolIdentifier, principal.getName()));
+        }
 
         return "/catalog/school-info";
     }
-
 }

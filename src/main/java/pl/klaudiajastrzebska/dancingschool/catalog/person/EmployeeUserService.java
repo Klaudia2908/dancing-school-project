@@ -9,6 +9,8 @@ import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.PersonType;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonTypeEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.SchoolEmployeeEntity;
+import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
+import pl.klaudiajastrzebska.dancingschool.catalog.school.mapper.SchoolMapper;
 import pl.klaudiajastrzebska.dancingschool.security.UserRepository;
 import pl.klaudiajastrzebska.dancingschool.security.UserRolesRepository;
 import pl.klaudiajastrzebska.dancingschool.security.entity.UserEntity;
@@ -35,6 +37,17 @@ public class EmployeeUserService {
         PersonEntity personEntity = preparePersonEntity(command);
 
         personRepository.save(personEntity);
+    }
+
+    public boolean employeeExistsWithinSchoolAddress(String schoolIdentifier, String employeeUserName){
+        return schoolEmployeeRepository.findBySchoolIdentifierAndUserName(schoolIdentifier, employeeUserName).isPresent();
+    }
+
+    public List<SchoolDto> getSchoolsForEmployee(String employeeUserName) {
+        return schoolEmployeeRepository.findAllSchoolsForGivenEmployee(employeeUserName)
+                .stream()
+                .map(SchoolMapper::mapToDto)
+                .toList();
     }
 
     private PersonEntity preparePersonEntity(AddNewPersonCommand command) {

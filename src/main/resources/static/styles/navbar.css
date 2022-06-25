@@ -3,18 +3,19 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 .navbar-wrapper {
     margin: auto;
     padding: 0px 30px;
 
 }
 
-.logo-container{
+.logo-container {
     display: flex;
     justify-content: start;
 }
 
-.menu-container{
+.menu-container {
     display: flex;
     justify-content: end;
 }
@@ -26,16 +27,18 @@
     width: 100%;
 }
 
-.navbar .navbar-wrapper{
+.navbar .navbar-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.logo img{
+
+.logo img {
     width: 10%;
     height: auto;
 }
-.logo a{
+
+.logo a {
     text-decoration: none;
 }
 
@@ -47,7 +50,7 @@
     list-style: none;
 }
 
-.menu-list li a{
+.menu-list li a {
     color: white;
     font-size: 20px;
     text-decoration: none;
@@ -63,7 +66,4 @@
 .menu-list li a:hover {
     background-color: rgba(0, 0, 0, .9);
 }
-
-
-
 

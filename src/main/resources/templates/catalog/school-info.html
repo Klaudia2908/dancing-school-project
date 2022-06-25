@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <title th:text="${school.name}"></title>
@@ -12,9 +13,12 @@
 <div th:insert="navbar.html :: navbar"/>
 
 <div class="container">
-    <div class="school-info-container">
-        <h1 th:text="${school.name}"></h1>
-        <p th:text="${school.description}"><p/>
+    <div class="buttons-container">
+        <a th:if="${employeeAllowedToAddSchedule}" class="button"
+           th:href="@{/{schoolIdentifier}/courses(schoolIdentifier=${school.shortName})}">ZARZĄDZAJ</a>
+
+        <a sec:authorize="hasAuthority('USER')" class="button"
+           th:href="@{/{schoolIdentifier}/courses/sign(schoolIdentifier=${school.shortName})}">ZAPISZ SIĘ NA KURS</a>
     </div>
 </div>
 

@@ -1,15 +1,41 @@
-.container {
-    width: 100%;
-    height: 100%;
-    position: absolute;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.school-info-container {
-    width: 80%;
-    margin: 0;
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
+.container {
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 30%;
+}
+
+.button {
+    width: 30%;
+    height: 15%;
+    margin: 0 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border-width: 0;
+    background-color: #ed872d;
+    color: #FFF;
+    transition: .5s;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: #ff7518;
 }

@@ -13,6 +13,8 @@ import pl.klaudiajastrzebska.dancingschool.catalog.school.SchoolService;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDefinitionDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
 import pl.klaudiajastrzebska.dancingschool.security.SecurityService;
+import pl.klaudiajastrzebska.dancingschool.security.dto.UserDto;
+import pl.klaudiajastrzebska.dancingschool.security.dto.UserRoleDto;
 
 import java.util.List;
 
@@ -76,5 +78,13 @@ public class CatalogApi {
 
     public List<SchoolDto> getNotAttachedSchoolsForLogin(String employeeLogin) {
         return schoolService.getSchoolsAvailableForAttachingForLogin(employeeLogin);
+    }
+
+    public boolean isUserAllowedToAddSchedule(String schoolIdentifier, String userName) {
+        return employeeUserService.employeeExistsWithinSchoolAddress(schoolIdentifier, userName);
+    }
+
+    public List<SchoolDto> getSchoolsForEmployee(String employeeUserName) {
+        return employeeUserService.getSchoolsForEmployee(employeeUserName);
     }
 }
