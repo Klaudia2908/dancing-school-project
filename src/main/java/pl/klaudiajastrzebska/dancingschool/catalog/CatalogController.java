@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.klaudiajastrzebska.dancingschool.catalog.course.CourseService;
 import pl.klaudiajastrzebska.dancingschool.security.ApiUrlMappings;
 
 import java.security.Principal;
@@ -15,6 +16,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 class CatalogController {
     private final CatalogApi catalogApi;
+    private final CourseService courseService;
 
     @GetMapping(ApiUrlMappings.SCHOOLS_BROWSE)
     String schoolsView(@RequestParam(value = "city") String city, Model model) {
@@ -26,6 +28,8 @@ class CatalogController {
     @GetMapping(ApiUrlMappings.SINGLE_SCHOOL_SCREEN)
     String schoolInfo(@PathVariable String schoolIdentifier, Model model, Principal principal) {
         model.addAttribute("school", catalogApi.getSchoolByIdentifier(schoolIdentifier));
+        model.addAttribute("courses", courseService.getAllCoursesForSchoolIdentifier(schoolIdentifier));
+        //todo add instructors
 
         if(Objects.nonNull(principal)){
             model.addAttribute("employeeAllowedToAddSchedule", catalogApi.isUserAllowedToAddSchedule(schoolIdentifier, principal.getName()));

@@ -87,4 +87,8 @@ public class CatalogApi {
     public List<SchoolDto> getSchoolsForEmployee(String employeeUserName) {
         return employeeUserService.getSchoolsForEmployee(employeeUserName);
     }
+
+    public void attachEmployeeToSchool(String employeeLogin, String schoolIdentifier) {
+        employeeUserService.attachEmployeeToSchool(employeeLogin, schoolIdentifier);
+    }
 }

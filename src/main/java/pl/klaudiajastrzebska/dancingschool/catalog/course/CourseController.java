@@ -14,7 +14,6 @@ import pl.klaudiajastrzebska.dancingschool.validaton.ValidationException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,7 +28,7 @@ class CourseController {
             return "/error";
         }
 
-        model.addAttribute("courses", List.of());
+        model.addAttribute("courses", courseApi.getAllCoursesForSchoolIdentifier(schoolIdentifier));
 
         return "/catalog/courses/main";
     }
@@ -54,8 +53,8 @@ class CourseController {
             return "/error";
         }
 
-        courseApi.addNewCourse(AddNewCourseCommand.of(addCourseFormDataDto, schoolIdentifier, principal.getName()));
-        model.addAttribute("courses", List.of());
+        courseApi.addNewCourse(AddNewCourseCommand.of(addCourseFormDataDto, schoolIdentifier));
+        model.addAttribute("courses", courseApi.getAllCoursesForSchoolIdentifier(schoolIdentifier));
 
         return "/catalog/courses/main";
     }
@@ -63,9 +62,19 @@ class CourseController {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(ValidationException.class)
     String handleValidationException(ValidationException e, Model model, HttpServletRequest request) {
-        model.addAttribute("addCourseFormDataDto", e.getValidatedCommand());
+        AddCourseFormDataDto validatedCommand = (AddCourseFormDataDto) e.getValidatedCommand();
+
+        model.addAttribute("addCourseFormDataDto", validatedCommand);
         model.addAttribute("schoolIdentifier", UriUtils.getPathVariable("schoolIdentifier", request));
         model.addAttribute("validationErrors", e.getValidationErrors());
+
+        model.addAttribute("chosenStyle", validatedCommand.getStyle());
+        model.addAttribute("chosenLevel", validatedCommand.getLevel());
+        model.addAttribute("chosenAgeGroup", validatedCommand.getAgeGroup());
+
+        model.addAttribute("styles", dictionaryService.getDanceStyles());
+        model.addAttribute("levels", dictionaryService.getDanceLevels());
+        model.addAttribute("ageGroups", dictionaryService.getAgeGroups());
 
         return "/catalog/courses/add";
     }

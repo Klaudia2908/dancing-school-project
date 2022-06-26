@@ -30,24 +30,30 @@
                     <p class="validationErrorParagraph" th:if="${validationError.fieldName} == price" th:text="${validationError.message}"></p>
                 </div>
 
-                <select class="form-input" id="style" th:field="*{style}">
-                    <option value="" disabled selected>STYL TANECZNY</option>
+                <select class="form-input" name="style">
+                    <option th:if="${chosenStyle != null}" th:text="${chosenStyle}" th:value="${chosenStyle}" selected hidden></option>
+                    <option th:if="${chosenStyle == null}"  value="" th:selected="true" th:disabled="true" th:hidden="true">Wybierz styl taneczny...</option>
+
                     <option th:each="style : ${styles}" th:value="${style}" th:text="${style}"></option>
                 </select>
                 <div th:each="validationError : ${validationErrors}">
                     <p class="validationErrorParagraph" th:if="${validationError.fieldName} == style" th:text="${validationError.message}"></p>
                 </div>
 
-                <select class="form-input" id="level" th:field="*{level}">
-                    <option value="" disabled selected >POZIOM ZAAWANSOWANIA</option>
+                <select class="form-input" name="level" >
+                    <option th:if="${chosenLevel != null}" th:text="${chosenLevel}" th:value="${chosenLevel}" selected hidden></option>
+                    <option th:if="${chosenLevel == null}" value="" selected disabled hidden>Wybierz poziom zaawansowania...</option>
+
                     <option th:each="level : ${levels}" th:value="${level}" th:text="${level}"></option>
                 </select>
                 <div th:each="validationError : ${validationErrors}">
                     <p class="validationErrorParagraph" th:if="${validationError.fieldName} == level" th:text="${validationError.message}"></p>
                 </div>
 
-                <select class="form-input" id="ageGroup" th:field="*{ageGroup}">
-                    <option value="" disabled selected>GRUPA WIEKOWA</option>
+                <select class="form-input" name="ageGroup" >
+                    <option th:if="${chosenAgeGroup != null}" th:text="${chosenAgeGroup}" th:value="${chosenAgeGroup}" selected hidden></option>
+                    <option th:if="${chosenAgeGroup == null}" value="" th:selected="true" th:disabled="true" th:hidden="true">Wybierz grupę wiekową...</option>
+
                     <option th:each="ageGroup : ${ageGroups}" th:value="${ageGroup}" th:text="${ageGroup}"></option>
                 </select>
                 <div th:each="validationError : ${validationErrors}">

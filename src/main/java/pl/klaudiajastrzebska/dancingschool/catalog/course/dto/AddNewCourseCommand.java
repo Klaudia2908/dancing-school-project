@@ -7,5 +7,4 @@ public class AddNewCourseCommand {
     AddCourseFormDataDto formDataDto;
 
     String schoolIdentifier;
-    String employeeUserName;
 }

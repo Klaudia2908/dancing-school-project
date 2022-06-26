@@ -35,15 +35,15 @@
                     <td colspan="2"> Brak dostępnych szkół</td>
                 </tr>
                 <tr th:each="school : ${availableSchools}">
-                    <td><span th:text="${school.name}"> Login </span></td>
-                    <td><span th:text="${school.description}"> Login </span></td>
-                    <td><span th:text="${school.city}"> Login </span></td>
-                    <td><span th:text="${school.street}"> Login </span></td>
-                    <td><span th:text="${school.numberOfTheBuilding}"> Login </span></td>
-                    <td><span th:text="${school.flatNumber}"> Login </span></td>
-                    <td><span th:text="${school.postCode}"> Login </span></td>
-                    <td><span th:text="${school.shortName}"> Login </span></td>
-                    <td><a class="attach" th:href="@{employees/attach/{login}/{identifier}(login=${login})(identifier=${school.shortName})}">PRZYPISZ</a></td>
+                    <td><span th:text="${school.name}"> Nazwa </span></td>
+                    <td><span th:text="${school.description}"> Opis </span></td>
+                    <td><span th:text="${school.city}"> Miasto </span></td>
+                    <td><span th:text="${school.street}"> Ulica </span></td>
+                    <td><span th:text="${school.numberOfTheBuilding}"> Numer budynku </span></td>
+                    <td><span th:text="${school.flatNumber}"> Numer lokalu </span></td>
+                    <td><span th:text="${school.postCode}"> Kod Pocztowy </span></td>
+                    <td><span th:text="${school.shortName}"> Identyfikator </span></td>
+                    <td><a class="attach" th:href="@{'administration/employees/attach/' + ${login} + '/' + ${school.shortName}}">PRZYPISZ</a></td>
                 </tr>
                 </body>
             </table>

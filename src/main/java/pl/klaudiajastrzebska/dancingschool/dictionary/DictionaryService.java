@@ -17,7 +17,7 @@ public class DictionaryService {
     private final DanceStyleRepository danceStyleRepository;
     private final AgeGroupRepository ageGroupRepository;
 
-    public List<String> getAgeGroups(){
+    public List<String> getAgeGroups() {
         return ageGroupRepository.findAll()
                 .stream()
                 .map(AgeGroupEntity::toDto)
@@ -25,7 +25,7 @@ public class DictionaryService {
                 .toList();
     }
 
-    public List<String> getDanceStyles(){
+    public List<String> getDanceStyles() {
         return danceStyleRepository.findAll()
                 .stream()
                 .map(DanceStyleEntity::toDto)
@@ -33,11 +33,23 @@ public class DictionaryService {
                 .toList();
     }
 
-    public List<String> getDanceLevels(){
+    public List<String> getDanceLevels() {
         return danceLevelRepository.findAll()
                 .stream()
                 .map(DanceLevelEntity::toDto)
                 .map(DanceLevel::getValue)
                 .toList();
+    }
+
+    public DanceLevelEntity getDanceLevelEntity(String name) {
+        return danceLevelRepository.findByValue(name).get();
+    }
+
+    public DanceStyleEntity getDanceStyleEntity(String name) {
+        return danceStyleRepository.findByValue(name).get();
+    }
+
+    public AgeGroupEntity getAgeGroupEntity(String name) {
+        return ageGroupRepository.findByValue(name).get();
     }
 }

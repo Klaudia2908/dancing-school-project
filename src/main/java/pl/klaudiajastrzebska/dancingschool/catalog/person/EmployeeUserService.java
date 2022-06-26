@@ -9,7 +9,9 @@ import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.PersonType;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonTypeEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.SchoolEmployeeEntity;
+import pl.klaudiajastrzebska.dancingschool.catalog.school.SchoolAddressRepository;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
+import pl.klaudiajastrzebska.dancingschool.catalog.school.entity.SchoolAddressEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.mapper.SchoolMapper;
 import pl.klaudiajastrzebska.dancingschool.security.UserRepository;
 import pl.klaudiajastrzebska.dancingschool.security.UserRolesRepository;
@@ -30,6 +32,7 @@ public class EmployeeUserService {
     private final PersonRepository personRepository;
     private final PersonTypeRepository personTypeRepository;
     private final SchoolEmployeeRepository schoolEmployeeRepository;
+    private final SchoolAddressRepository schoolAddressRepository;
     private final UserRepository userRepository;
     private final UserRolesRepository userRolesRepository;
 
@@ -107,5 +110,16 @@ public class EmployeeUserService {
         userEntity.setRole(userRole);
 
         return userRepository.save(userEntity);
+    }
+
+    public void attachEmployeeToSchool(String employeeLogin, String schoolIdentifier) {
+        SchoolAddressEntity schoolAddress = schoolAddressRepository.findSchoolByIdentifier(schoolIdentifier).get();
+        PersonEntity employee = personRepository.findByAttachedUserName(employeeLogin).get();
+
+        SchoolEmployeeEntity schoolEmployeeEntity = new SchoolEmployeeEntity();
+        schoolEmployeeEntity.setEmployee(employee);
+        schoolEmployeeEntity.setSchool(schoolAddress);
+
+        schoolEmployeeRepository.save(schoolEmployeeEntity);
     }
 }

@@ -33,10 +33,10 @@
                     <tr th:each="course : ${courses}">
                         <td><span th:text="${course.name}"> Nazwa </span></td>
                         <td><span th:text="${course.description}"> Opis </span></td>
-                        <td><span th:text="${course.price}"> Miejscowość </span></td>
-                        <td><span th:text="${course.level}"> Ulica </span></td>
-                        <td><span th:text="${course.style}"> Numer budynku </span></td>
-                        <td><span th:text="${course.address}"> Number lokalu </span></td>
+                        <td><span th:text="${course.price}"> Cena </span></td>
+                        <td><span th:text="${course.level}"> Poziom zaawansowania </span></td>
+                        <td><span th:text="${course.style}"> Styl taneczny </span></td>
+                        <td><span th:text="${course.address}"> Adres placówki </span></td>
                         <td><a th:href="@{/{schoolIdentifier}/course/{courseId}/edit(schoolIdentifier=${schoolIdentifier})}">EDYTUJ</a></td>
                         <td><a class="delete" th:href="@{/{schoolIdentifier}/course/{courseId}/delete(schoolIdentifier=${schoolIdentifier})}">USUŃ</a></td>
                     </tr>

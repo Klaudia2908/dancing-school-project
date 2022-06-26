@@ -46,6 +46,13 @@ class EmployeesAdministrationController {
         return "/administration/employees/schools";
     }
 
+    @GetMapping("/employees/attach/{employeeLogin}/{schoolIdentifier}")
+    String attachEmployeeToSchool(Model model, @PathVariable String employeeLogin, @PathVariable String schoolIdentifier) {
+        catalogApi.attachEmployeeToSchool(employeeLogin, schoolIdentifier);
+
+        return "redirect:/administration/employees/attach";
+    }
+
     @PostMapping("/employees/new")
     String createEmployee(@ModelAttribute CreateEmployeeRequest request, Model model) {
         model.addAttribute("addedSuccessfully", true);

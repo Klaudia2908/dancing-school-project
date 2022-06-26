@@ -14,4 +14,10 @@ interface PersonRepository extends JpaRepository<PersonEntity, Long> {
             "where typ_os.nazwa ='EMPLOYEE' " +
             "and szk_prac.id_pracownika is null", nativeQuery = true)
     List<PersonEntity> findAllEmployeesWithoutSchool();
+
+
+    @Query(value = "SELECT * FROM OSOBY OS " +
+            "JOIN USERS U ON OS.ID_USER = U.ID " +
+            "WHERE U.LOGIN = :userName", nativeQuery = true)
+    Optional<PersonEntity> findByAttachedUserName(String userName);
 }
