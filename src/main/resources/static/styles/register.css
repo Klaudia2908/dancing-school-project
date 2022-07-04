@@ -9,6 +9,7 @@
 }
 
 .container {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     height: 100vh;
     background-image: url(../images/taniec1.jpg);
     background-attachment: fixed;
@@ -18,15 +19,15 @@
 }
 
 .form_wrapper {
+    font-size: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    border: 1px solid bisque;
-    width: 45vh;
-    height: 30vw;
-    background-color: #EAEAEA;
+    width: 500px;
+    height: 800px;
+    background-color: white;
     position: absolute;
     top: 20%;
     left: 50%;
@@ -34,11 +35,15 @@
 }
 
 .input_field {
-    padding: 10px 0;
+    padding: 15px 0;
 }
 
 input {
     font-size: 20px;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
 }
 
 h1 {
@@ -46,32 +51,23 @@ h1 {
 }
 
 .button {
+    bottom: 5%;
     position: absolute;
     width: 40%;
     margin-top: 10%;
     left: 50%;
     transform: translateX(-50%);
-    border: 0;
     line-height: 2.5;
     padding: 0 10px;
     font-size: 1rem;
     text-align: center;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
     border-radius: 4px;
-    background-color: #ed872d;
-    background-image: linear-gradient(to top left,
-    rgba(0, 0, 0, .2),
-    rgba(0, 0, 0, .2) 30%,
-    rgba(0, 0, 0, 0));
+    border: 2px solid black;
     transition: .5s;
+    background-color: white;
 }
 
 .button:hover {
-    background-color: #ff7518;
-}
-
-.button:active {
-    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
-    inset 2px 2px 3px rgba(0, 0, 0, .6);
+    border-color: darkorange;
+    color: darkorange;
 }

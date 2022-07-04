@@ -13,8 +13,6 @@ import pl.klaudiajastrzebska.dancingschool.catalog.school.SchoolService;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDefinitionDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
 import pl.klaudiajastrzebska.dancingschool.security.SecurityService;
-import pl.klaudiajastrzebska.dancingschool.security.dto.UserDto;
-import pl.klaudiajastrzebska.dancingschool.security.dto.UserRoleDto;
 
 import java.util.List;
 

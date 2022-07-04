@@ -13,7 +13,11 @@
 <div th:insert="navbar.html :: navbar"/>
 
 <div class="container">
-    <a th:if="${employeeAllowedToAddSchedule}" class="manage-button" th:href="@{/{schoolIdentifier}/courses(schoolIdentifier=${school.shortName})}">ZARZĄDZAJ</a>
+    <div th:if="${employeeAllowedToAddSchedule}" class="manage-buttons-section">
+        <a class="manage-button" th:href="@{/{schoolIdentifier}/courses(schoolIdentifier=${school.shortName})}">KURSY</a>
+        <a class="manage-button" th:href="@{/{schoolIdentifier}/instructors(schoolIdentifier=${school.shortName})}">INSTRUKTORZY</a>
+    </div>
+<!--    <a th:if="${employeeAllowedToAddSchedule}" class="manage-button" th:href="@{/{schoolIdentifier}/courses(schoolIdentifier=${school.shortName})}">ZARZĄDZAJ</a>-->
     <h1 class="school-name" th:text="${school.name}"></h1>
     <p class="school-description" th:text="${school.description}"></p>
     <h3 class="header">Dostępne kursy</h3>
@@ -35,6 +39,9 @@
                             <div class="course-detail">
                                 <span><b>Styl: </b></span><span th:text="${course.style}"></span>
                             </div>
+                            <div class="course-detail">
+                                <span><b>Cena: </b></span><span th:text="${course.price}"></span><span> PLN</span>
+                            </div>
                         </div>
                         <div class="sign-button-holder">
                             <a class="sign-button" href="/">Zobacz haromonogramy</a>
@@ -47,32 +54,14 @@
 
     <h3 class="header">Instruktorzy</h3>
     <div class="instructors-section">
-        <div class="instructors">
-            <div class="instructor">
+        <div class="instructors" >
+            <div class="instructor" th:each="instructor : ${instructors}">
                 <div class="image-holder">
                     <img class="image" src="https://upload.wikimedia.org/wikipedia/commons/4/41/Profile-720.png" width="100%" height="100%">
                 </div>
                 <div class="instructor-info">
-                    <div class="instructor-name">Paweł Różyński</div>
-                    <div class="instructor-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div>
-                </div>
-            </div>
-            <div class="instructor">
-                <div class="image-holder">
-                    <img class="image" src="https://upload.wikimedia.org/wikipedia/commons/4/41/Profile-720.png" width="100%" height="100%">
-                </div>
-                <div class="instructor-info">
-                    <div class="instructor-name">Krzysztof Bąk</div>
-                    <div class="instructor-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div>
-                </div>
-            </div>
-            <div class="instructor">
-                <div class="image-holder">
-                    <img class="image" src="https://upload.wikimedia.org/wikipedia/commons/4/41/Profile-720.png" width="100%" height="100%">
-                </div>
-                <div class="instructor-info">
-                    <div class="instructor-name">Bartek Alias</div>
-                    <div class="instructor-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div>
+                    <div class="instructor-name" th:text="${instructor.firstName} + ' ' + ${instructor.lastName}"></div>
+                    <div class="instructor-description" th:text="${instructor.description}"></div>
                 </div>
             </div>
         </div>

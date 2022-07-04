@@ -24,6 +24,7 @@
                         <th> Adres Szkoły</th>
                         <th> </th>
                         <th> </th>
+                        <th> </th>
                     </tr>
                     </thead>
                     <body>
@@ -37,6 +38,7 @@
                         <td><span th:text="${course.level}"> Poziom zaawansowania </span></td>
                         <td><span th:text="${course.style}"> Styl taneczny </span></td>
                         <td><span th:text="${course.address}"> Adres placówki </span></td>
+                        <td><a th:href="@{'/' + ${schoolIdentifier} + '/schedules/' + ${course.uuid}}">HARMONOGRAMY</a></td>
                         <td><a th:href="@{/{schoolIdentifier}/course/{courseId}/edit(schoolIdentifier=${schoolIdentifier})}">EDYTUJ</a></td>
                         <td><a class="delete" th:href="@{/{schoolIdentifier}/course/{courseId}/delete(schoolIdentifier=${schoolIdentifier})}">USUŃ</a></td>
                     </tr>

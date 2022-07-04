@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj Harmonogram</title>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/catalog/courses/schedules/add.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="navbar.html :: navbar"/>
+<div class="container">
+    <h3>Wprowadź dane:</h3>
+    <form class="schedule-form" th:action="@{'/' + ${schoolIdentifier} + '/schedules/' + ${courseUUID} + '/add'}" th:object="${addScheduleFormData}" method="post">
+
+        <label class="label" for="dateFrom">Data obowiązywania od:</label>
+        <input type="date" id="dateFrom" th:field="*{dateFrom}">
+        <div th:each="validationError : ${validationErrors}">
+            <p class="validationErrorParagraph" th:if="${validationError.fieldName} == dateFrom" th:text="${validationError.message}"></p>
+        </div>
+
+        <label class="label" for="dateTo">Data obowiązywania do:</label>
+        <input type="date" id="dateTo" th:field="*{dateTo}">
+        <div th:each="validationError : ${validationErrors}">
+            <p class="validationErrorParagraph" th:if="${validationError.fieldName} == dateTo" th:text="${validationError.message}"></p>
+        </div>
+
+        <label class="label" for="dayOfWeek">Dzień tygodnia:</label>
+        <select name="dayOfWeek" id="dayOfWeek">
+            <option th:if="${chosenDayOfWeek != null}" th:text="${chosenDayOfWeek}" th:value="${chosenDayOfWeek}" selected hidden></option>
+            <option th:if="${chosenDayOfWeek == null}" value="" disabled selected hidden >Wybierz dzień tygodnia...</option>
+            <option th:each="dayOfWeek: ${daysOfWeek}" th:value="${dayOfWeek}" th:text="${dayOfWeek}"></option>
+        </select>
+        <div th:each="validationError : ${validationErrors}">
+            <p class="validationErrorParagraph" th:if="${validationError.fieldName} == dayOfWeek" th:text="${validationError.message}"></p>
+        </div>
+
+        <label class="label" for="timeStart">Godzina rozpoczęcia:</label>
+        <input type="time" id="timeStart" th:field="*{timeStart}">
+        <div th:each="validationError : ${validationErrors}">
+            <p class="validationErrorParagraph" th:if="${validationError.fieldName} == timeStart" th:text="${validationError.message}"></p>
+        </div>
+
+        <label class="label" for="timeEnd">Godzina zakończenia:</label>
+        <input type="time" id="timeEnd" th:field="*{timeEnd}">
+        <div th:each="validationError : ${validationErrors}">
+            <p class="validationErrorParagraph" th:if="${validationError.fieldName} == timeEnd" th:text="${validationError.message}"></p>
+        </div>
+
+        <label class="label" for="instructor">Przypisany instruktor:</label>
+        <select name="instructorId" id="instructor">
+            <option value="" disabled selected hidden >Przypisz instruktora</option>
+            <option th:each="instructor: ${instructors}" th:value="${instructor.id}" th:text="${instructor.firstName} + ' ' + ${instructor.lastName}"></option>
+        </select>
+        <div th:each="validationError : ${validationErrors}">
+            <p class="validationErrorParagraph" th:if="${validationError.fieldName} == instructorId" th:text="${validationError.message}"></p>
+        </div>
+
+        <label class="label" for="maxCapacity">Rozmiar grupy:</label>
+        <input type="number" min="0" id="maxCapacity" placeholder="Rozmiar grupy..." th:field="*{maxCapacity}">
+
+        <input type="submit">
+    </form>
+</div>
+</body>
+</html>

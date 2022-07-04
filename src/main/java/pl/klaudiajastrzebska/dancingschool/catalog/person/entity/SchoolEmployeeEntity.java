@@ -1,6 +1,7 @@
 package pl.klaudiajastrzebska.dancingschool.catalog.person.entity;
 
 import lombok.Data;
+import org.apache.logging.log4j.util.Strings;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.EmployeeDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.entity.SchoolAddressEntity;
 import pl.klaudiajastrzebska.dancingschool.security.entity.UserEntity;
@@ -25,15 +26,17 @@ public class SchoolEmployeeEntity {
     private PersonEntity employee;
 
     public EmployeeDto toDto() {
-        UserEntity user = employee.getUser();
+        UserEntity user = employee.getUser() == null ? new UserEntity() : employee.getUser();
 
         return EmployeeDto
                 .builder()
+                .personId(employee.getId())
                 .login(user.getLogin())
                 .description(employee.getDescription())
                 .lastName(employee.getLastName())
                 .firstName(employee.getFirstName())
                 .gender(employee.getGender())
+                .birthDate(employee.getBirthDate())
                 .schoolNameAndAddress(getSchoolInformation(school))
                 .build();
     }

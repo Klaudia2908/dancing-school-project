@@ -5,6 +5,6 @@ import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonTypeEntit
 
 import java.util.Optional;
 
-interface PersonTypeRepository extends JpaRepository<PersonTypeEntity, Long> {
+public interface PersonTypeRepository extends JpaRepository<PersonTypeEntity, Long> {
     Optional<PersonTypeEntity> findByValue(String value);
 }

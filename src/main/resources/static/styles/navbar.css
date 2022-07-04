@@ -5,9 +5,17 @@
 }
 
 .navbar-wrapper {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: auto;
-    padding: 0px 30px;
+    padding: 5px 30px;
+}
 
+.user-name-container {
+    position: absolute;
+    left: 100px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    justify-content: end;
+    color: white;
 }
 
 .logo-container {

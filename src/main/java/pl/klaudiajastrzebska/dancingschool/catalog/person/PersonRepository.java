@@ -7,7 +7,7 @@ import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonEntity;
 import java.util.List;
 import java.util.Optional;
 
-interface PersonRepository extends JpaRepository<PersonEntity, Long> {
+public interface PersonRepository extends JpaRepository<PersonEntity, Long> {
     @Query(value = "select * from osoby os " +
             "join S_TYP_OSOBY typ_os on typ_os.id = os.ID_TYP_OSOBY " +
             "left join SZKOLY_PRACOWNICY szk_prac on szk_prac.id_pracownika = os.id " +

@@ -11,7 +11,6 @@
     position: absolute;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     width: 80%;
-
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -59,7 +58,7 @@
     height: 100%;
     display: flex;
     justify-content: flex-start;
-    align-items: sta;
+    align-items: start;
     flex-direction: column;
 }
 
@@ -193,14 +192,20 @@
     border-radius: 50%;
 }
 
-.manage-button {
-    border: 1px solid black;
-    padding: 1% 1%;
+.manage-buttons-section {
+    display: flex;
     position: absolute;
     right: 5%;
+}
+
+.manage-button {
+    margin-left: 3%;
+    margin-right: 3%;
+    padding: 5% 7%;
+    border: 2px solid black;
     color: black;
-    font-weight: bold;
     text-decoration: none;
+    font-weight: bold;
     transition: 0.5s;
 }
 

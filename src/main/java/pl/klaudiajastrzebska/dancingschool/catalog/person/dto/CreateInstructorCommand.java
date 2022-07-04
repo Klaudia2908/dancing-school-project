@@ -7,13 +7,11 @@ import java.time.LocalDate;
 
 @Value
 @Builder
-public class EmployeeDto {
-    long personId;
-    String login;
+public class CreateInstructorCommand {
     String firstName;
     String lastName;
+    LocalDate birthDate;
     String gender;
     String description;
-    LocalDate birthDate;
-    String schoolNameAndAddress;
+    String schoolIdentifier;
 }

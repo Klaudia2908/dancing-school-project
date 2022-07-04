@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj instruktora: </title>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/catalog/instructors/add.css}" rel="stylesheet">
+</head>
+<body>
+
+<div th:insert="navbar.html :: navbar"/>
+
+<div class="container">
+    <h3>Wprowadź dane:</h3>
+    <form class="instructor-form" th:action="@{/{schoolIdentifier}/instructors/add(schoolIdentifier=${schoolIdentifier})}" th:object="${addInstructorCommand}" method="post">
+
+        <input type="text" id="firstName" placeholder="Imie" th:field="*{firstName}">
+        <div th:each="validationError : ${validationErrors}">
+            <p class="validationErrorParagraph" th:if="${validationError.fieldName} == firstName" th:text="${validationError.message}"></p>
+        </div>
+
+        <input type="text" id="lastName" placeholder="Nazwisko" th:field="*{lastName}">
+        <div th:each="validationError : ${validationErrors}">
+            <p class="validationErrorParagraph" th:if="${validationError.fieldName} == lastName" th:text="${validationError.message}"></p>
+        </div>
+
+        <textarea type="textarea" placeholder="Opis"  rows="15" th:field="*{description}"></textarea>
+        <div th:each="validationError : ${validationErrors}">
+            <p class="validationErrorParagraph" th:if="${validationError.fieldName} == description" th:text="${validationError.message}"></p>
+        </div>
+
+        <label class="label" for="birthDate">Data urodzenia:</label>
+        <input type="date" id="birthDate" name="lastName" placeholder="Data urodzenia" th:field="*{birthDate}"/>
+        <div th:each="validationError : ${validationErrors}">
+            <p class="validationErrorParagraph" th:if="${validationError.fieldName} == birthDate" th:text="${validationError.message}"></p>
+        </div>
+
+        <select name="gender" id="gender">
+            <option th:if="${chosenGender != null}" th:text="${chosenGender}" th:value="${chosenGender}" selected hidden></option>
+            <option th:if="${chosenGender == null}" value="" disabled selected hidden >Wybierz płeć...</option>
+            <option th:value="MĘŻCZYZNA" th:text="MĘŻCZYZNA"></option>
+            <option th:value="KOBIETA" th:text="KOBIETA"></option>
+        </select>
+        <div th:each="validationError : ${validationErrors}">
+            <p class="validationErrorParagraph" th:if="${validationError.fieldName} == gender" th:text="${validationError.message}"></p>
+        </div>
+
+        <input type="submit">
+    </form>
+</div>
+</body>
+
+</html>

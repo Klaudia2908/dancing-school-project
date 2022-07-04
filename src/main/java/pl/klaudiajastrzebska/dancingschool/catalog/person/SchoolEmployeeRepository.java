@@ -12,6 +12,12 @@ interface SchoolEmployeeRepository extends JpaRepository<SchoolEmployeeEntity, L
 
     @Query(value = "select * from szkoly_pracownicy szkpr " +
             "join osoby os on szkpr.id_pracownika = os.id " +
+            "join s_typ_osoby typ on typ.id = os.id_typ_osoby " +
+            "where typ.nazwa = 'EMPLOYEE'", nativeQuery = true)
+    List<SchoolEmployeeEntity> findAllEmployees();
+
+    @Query(value = "select * from szkoly_pracownicy szkpr " +
+            "join osoby os on szkpr.id_pracownika = os.id " +
             "join adres_szkoly adrszk on adrszk.id = szkpr.id_szkoly " +
             "join users us on us.id = os.id_user " +
             "where us.login = :userName " +
@@ -23,4 +29,12 @@ interface SchoolEmployeeRepository extends JpaRepository<SchoolEmployeeEntity, L
             "join users u on u.id = o.id_user " +
             "where login = :employeeUserName", nativeQuery = true)
     List<SchoolEmployeeEntity> findAllSchoolsForGivenEmployee(String employeeUserName);
+
+    @Query(value = "select * from szkoly_pracownicy sp " +
+            "join osoby o on o.id = sp.id_pracownika " +
+            "join adres_szkoly adr on adr.id = sp.id_szkoly " +
+            "join s_typ_osoby typ_os on typ_os.id = o.id_typ_osoby " +
+            "where typ_os.nazwa='INSTRUCTOR' " +
+            "and adr.identyfikator=:schoolIdentifier", nativeQuery = true)
+    List<SchoolEmployeeEntity> findAllInstructorsForSchoolIdentifier(String schoolIdentifier);
 }

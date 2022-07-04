@@ -2,10 +2,7 @@ package pl.klaudiajastrzebska.dancingschool.catalog.person;
 
 import lombok.RequiredArgsConstructor;
 import pl.klaudiajastrzebska.dancingschool.administration.employees.dto.CreateEmployeeRequest;
-import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.AddNewPersonCommand;
-import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.EmployeeDto;
-import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.PersonDto;
-import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.PersonType;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.*;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonTypeEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.SchoolEmployeeEntity;
@@ -36,13 +33,20 @@ public class EmployeeUserService {
     private final UserRepository userRepository;
     private final UserRolesRepository userRolesRepository;
 
-    public void addNewPerson(AddNewPersonCommand command) {
+    public PersonEntity addNewPerson(AddNewPersonCommand command) {
         PersonEntity personEntity = preparePersonEntity(command);
 
-        personRepository.save(personEntity);
+        return personRepository.save(personEntity);
     }
 
-    public boolean employeeExistsWithinSchoolAddress(String schoolIdentifier, String employeeUserName){
+    public List<EmployeeDto> getInstructorsForGivenSchoolIdentifier(String schoolIdentifier) {
+        return schoolEmployeeRepository.findAllInstructorsForSchoolIdentifier(schoolIdentifier)
+                .stream()
+                .map(SchoolEmployeeEntity::toDto)
+                .toList();
+    }
+
+    public boolean employeeExistsWithinSchoolAddress(String schoolIdentifier, String employeeUserName) {
         return schoolEmployeeRepository.findBySchoolIdentifierAndUserName(schoolIdentifier, employeeUserName).isPresent();
     }
 
@@ -62,7 +66,9 @@ public class EmployeeUserService {
         personEntity.setGender(command.getGender());
         personEntity.setBirthDate(command.getBirthDate());
         personEntity.setDescription(command.getDescription());
-        personEntity.setUser(userRepository.findById(command.getUserId()).get());
+        if(command.getUserId() != null){
+            personEntity.setUser(userRepository.findById(command.getUserId()).get());
+        }
         personEntity.setPersonType(value.get());
 
         return personEntity;
@@ -70,7 +76,7 @@ public class EmployeeUserService {
 
     public List<EmployeeDto> getAllEmployees() {
         return schoolEmployeeRepository
-                .findAll()
+                .findAllEmployees()
                 .stream()
                 .map(SchoolEmployeeEntity::toDto)
                 .toList();
@@ -99,6 +105,27 @@ public class EmployeeUserService {
         employee.setGender(request.getGender());
 
         personRepository.save(employee);
+    }
+
+    public void createInstructor(CreateInstructorCommand command) {
+        AddNewPersonCommand addNewPersonCommand = AddNewPersonCommand
+                .builder()
+                .firstName(command.getFirstName())
+                .lastName(command.getLastName())
+                .description(command.getDescription())
+                .birthDate(command.getBirthDate())
+                .gender(command.getGender())
+                .personType(PersonType.INSTRUCTOR)
+                .build();
+
+        PersonEntity savedInstructor = addNewPerson(addNewPersonCommand);
+        SchoolAddressEntity schoolAddress = schoolAddressRepository.findSchoolByIdentifier(command.getSchoolIdentifier()).get();
+
+        SchoolEmployeeEntity schoolEmployeeEntity = new SchoolEmployeeEntity();
+        schoolEmployeeEntity.setSchool(schoolAddress);
+        schoolEmployeeEntity.setEmployee(savedInstructor);
+
+        schoolEmployeeRepository.save(schoolEmployeeEntity);
     }
 
     private UserEntity createAndSaveNewEmployeeUser(CreateEmployeeRequest request) {

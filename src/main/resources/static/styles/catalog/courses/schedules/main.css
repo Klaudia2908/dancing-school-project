@@ -1,0 +1,113 @@
+body {
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    box-sizing: border-box;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+
+.add-schedule-button {
+    top: 5%;
+    right: 3%;
+    font-weight: bold;
+    padding: 20px 10px;
+    border: 2px solid black;
+    position: absolute;
+    text-decoration: none;
+    color: black;
+    transition: 0.5s;
+}
+
+.add-schedule-button:hover{
+    border-color: darkorange;
+    color: darkorange;
+}
+
+.schedules-section{
+    top: 25%;
+    position: absolute;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.schedule {
+    padding: 5px 10px;
+    margin: 5px 0 5px;
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 450px;
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+
+.schedule-description-section{
+    position: relative;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px ;
+    width: 60%;
+}
+
+.description{
+    width: 100%;
+    word-wrap: break-word;
+    margin-bottom:  15px;
+}
+
+.photo {
+    padding: 5px 5px;
+    width: 200px;
+    height: 200px;
+}
+.photo img{
+    width: 100%;
+    min-height: 200px;
+    min-width: 200px;
+    height: 100%;
+}
+
+.buttons-section {
+    bottom: 2%;
+    right: 1%;
+    position: absolute;
+    display: flex;
+}
+
+.button {
+    text-decoration: none;
+    color: black;
+    border: 2px solid black;
+    margin: 5px 10px;
+    padding: 5px 10px;
+    transition: 0.5s;
+}
+
+.red {
+    border-color: red;
+    color: red;
+}
+.button:hover{
+    color: darkorange;
+    border: 2px solid darkorange;
+}
+
+.no-schedules{
+    position: absolute;
+    top: 10%;
+    font-size: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}

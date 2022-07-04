@@ -56,6 +56,7 @@ public class CourseEntity {
                 .name(name)
                 .description(description)
                 .price(price)
+                .uuid(uuid)
                 .level(level.getValue())
                 .style(style.getValue())
                 .ageGroup(ageGroupEntity.getValue())

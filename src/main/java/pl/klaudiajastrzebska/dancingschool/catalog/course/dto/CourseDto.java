@@ -13,6 +13,7 @@ public class CourseDto {
     BigDecimal price;
     String level;
     String style;
+    String uuid;
     String ageGroup;
     String address;
 }

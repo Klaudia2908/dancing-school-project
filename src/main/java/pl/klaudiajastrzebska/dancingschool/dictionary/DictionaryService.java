@@ -5,9 +5,11 @@ import lombok.RequiredArgsConstructor;
 import pl.klaudiajastrzebska.dancingschool.dictionary.dto.AgeGroup;
 import pl.klaudiajastrzebska.dancingschool.dictionary.dto.DanceLevel;
 import pl.klaudiajastrzebska.dancingschool.dictionary.dto.DanceStyle;
+import pl.klaudiajastrzebska.dancingschool.dictionary.dto.Day;
 import pl.klaudiajastrzebska.dancingschool.dictionary.entity.AgeGroupEntity;
 import pl.klaudiajastrzebska.dancingschool.dictionary.entity.DanceLevelEntity;
 import pl.klaudiajastrzebska.dancingschool.dictionary.entity.DanceStyleEntity;
+import pl.klaudiajastrzebska.dancingschool.dictionary.entity.DayEntity;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class DictionaryService {
     private final DanceLevelRepository danceLevelRepository;
     private final DanceStyleRepository danceStyleRepository;
     private final AgeGroupRepository ageGroupRepository;
+    private final DayRepository dayRepository;
 
     public List<String> getAgeGroups() {
         return ageGroupRepository.findAll()
@@ -38,6 +41,14 @@ public class DictionaryService {
                 .stream()
                 .map(DanceLevelEntity::toDto)
                 .map(DanceLevel::getValue)
+                .toList();
+    }
+
+    public List<String> getDays() {
+        return dayRepository.findAll()
+                .stream()
+                .map(DayEntity::toDto)
+                .map(Day::getValue)
                 .toList();
     }
 

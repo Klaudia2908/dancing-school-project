@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instruktorzy</title>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+    <link th:href="@{/styles/catalog/instructors/main.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="navbar.html :: navbar"/>
+
+<a class="add-instructor-button" th:href="@{'/' + ${schoolIdentifier} + '/instructors/add'}">DODAJ INSTRUKTORA</a>
+<div class="container">
+    <div class="instructors-section">
+        <div th:if="${instructors.empty}" class="no-instructors red">BRAK AKTYWNYCH INSTRUKTORÓW!</div>
+        <div class="instructor" th:each="instructor: ${instructors}">
+            <div class="photo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Profile-720.png"></img>
+            </div>
+            <div class="instructor-description-section">
+                <h3 th:text="${instructor.firstName} + ' ' + ${instructor.lastName}"></h3>
+                <div class="description" th:text="${instructor.description}">
+                </div>
+                <span><b>Płeć: </b></span><span th:text="${instructor.gender}"></span>
+                </br>
+                <span><b>Data urodzenia: </b></span><span th:text="${instructor.birthDate}"></span>
+            </div>
+            <div class="buttons-section">
+                <a href="https://google.com" class="button">EDYTUJ</a>
+                <a href="https://google.com" class="button red">USUŃ</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -14,6 +14,9 @@
                         <a th:href="@{/home}"><img th:src="@{/images/logo_portal2.png}" title="logo" alt="logo"></a>
                     </div>
                 </div>
+                <div sec:authorize="isAuthenticated()" class="user-name-container">
+                    <span>Witaj</span> <span sec:authentication="name">Nazwa użytkownika</span><span>!</span>
+                </div>
                <div class="menu-container">
                    <div sec:authorize="isAnonymous()">
                        <ul class="menu-list">

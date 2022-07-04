@@ -1,6 +1,7 @@
 package pl.klaudiajastrzebska.dancingschool.catalog.course;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.Strings;
 import pl.klaudiajastrzebska.dancingschool.catalog.course.dto.AddCourseFormDataDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.course.dto.AddNewCourseCommand;
 import pl.klaudiajastrzebska.dancingschool.catalog.course.dto.CourseDto;
@@ -50,5 +51,11 @@ public class CourseService {
         courseEntity.setAgeGroupEntity(dictionaryService.getAgeGroupEntity(formDataDto.getAgeGroup()));
 
         return courseEntity;
+    }
+
+    public String getCourseNameByUuid(String courseUUID) {
+        return courseRepository.findByUuid(courseUUID)
+                .map(CourseEntity::getName)
+                .orElse(Strings.EMPTY);
     }
 }
