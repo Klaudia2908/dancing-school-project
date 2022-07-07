@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -33,6 +34,9 @@ public class SchoolAddressEntity {
 
     @Column(name = "DATA_ZAMKNIECIA")
     private LocalDateTime closeDate;
+
+    @OneToMany(mappedBy = "schoolAddress")
+    private List<SchoolContactEntity> schoolContact;
 
     @ManyToOne
     @JoinColumn(name = "ID_SZKOLY", referencedColumnName = "ID")

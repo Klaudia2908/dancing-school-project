@@ -11,7 +11,7 @@ import pl.klaudiajastrzebska.dancingschool.validaton.ValidationService;
 class Config {
 
     @Bean
-    ScheduleService scheduleService(ScheduleRepository scheduleRepository, ValidationService validationService, PersonRepository personRepository, CourseRepository courseRepository, DayRepository dayRepository) {
-        return new ScheduleService(scheduleRepository, validationService, personRepository, courseRepository, dayRepository);
+    ScheduleService scheduleService(ScheduleRepository scheduleRepository, ValidationService validationService, PersonRepository personRepository, CourseRepository courseRepository, DayRepository dayRepository, EnrollmentRepository enrollmentRepository) {
+        return new ScheduleService(scheduleRepository, validationService, personRepository, courseRepository, dayRepository, enrollmentRepository);
     }
 }

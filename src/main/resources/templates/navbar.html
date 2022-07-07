@@ -27,6 +27,12 @@
                        </ul>
                    </div>
 
+                   <div sec:authorize="hasAuthority('USER')">
+                       <ul class="menu-list">
+                           <li>  <a th:href="@{/announcements}" >Ogłoszenia</a></li>
+                       </ul>
+                   </div>
+
                    <div sec:authorize="hasAuthority('EMPLOYEE')">
                        <ul class="menu-list">
                            <li>  <a th:href="@{/my-schools}" >Moje szkoły</a></li>

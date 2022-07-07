@@ -4,7 +4,11 @@ import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.SchoolEmployeeE
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDefinitionDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.entity.SchoolAddressEntity;
+import pl.klaudiajastrzebska.dancingschool.catalog.school.entity.SchoolContactEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.entity.SchoolEntity;
+
+import java.util.Optional;
+import java.util.stream.Stream;
 
 public class SchoolMapper {
 
@@ -26,6 +30,22 @@ public class SchoolMapper {
     }
 
     public static SchoolDto mapToDto(SchoolAddressEntity entity) {
+
+        String schoolAddressEmail = entity.getSchoolContact()
+                .stream()
+                .filter(schoolContactEntity -> "EMAIL".equalsIgnoreCase(schoolContactEntity.getContactType().getValue()))
+                .map(SchoolContactEntity::getValue)
+                .findFirst()
+                .get();
+
+        String schoolAddressPhone = entity.getSchoolContact()
+                .stream()
+                .filter(schoolContactEntity -> "TEL".equalsIgnoreCase(schoolContactEntity.getContactType().getValue()))
+                .map(SchoolContactEntity::getValue)
+                .findFirst()
+                .get();
+
+
         return SchoolDto
                 .builder()
                 .name(entity.getSchool().getName())
@@ -37,6 +57,8 @@ public class SchoolMapper {
                 .street(entity.getStreet())
                 .shortName(entity.getShortName())
                 .closeDate(entity.getCloseDate())
+                .email(schoolAddressEmail)
+                .phone(schoolAddressPhone)
                 .build();
     }
 

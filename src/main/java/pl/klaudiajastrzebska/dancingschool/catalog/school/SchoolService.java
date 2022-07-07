@@ -10,8 +10,11 @@ import pl.klaudiajastrzebska.dancingschool.catalog.person.EmployeeUserService;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDefinitionDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.entity.SchoolAddressEntity;
+import pl.klaudiajastrzebska.dancingschool.catalog.school.entity.SchoolContactEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.entity.SchoolEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.mapper.SchoolMapper;
+import pl.klaudiajastrzebska.dancingschool.dictionary.DictionaryService;
+import pl.klaudiajastrzebska.dancingschool.dictionary.entity.ContactTypeEntity;
 import pl.klaudiajastrzebska.dancingschool.validaton.ValidationService;
 
 import javax.transaction.Transactional;
@@ -23,8 +26,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SchoolService {
     private final SchoolAddressRepository schoolAddressRepository;
+    private final SchoolContactRepository schoolContactRepository;
     private final SchoolRepository schoolRepository;
     private final ValidationService validationService;
+    private final DictionaryService dictionaryService;
 
     public List<SchoolDto> getSchoolsByCity(String city) {
         if (StringUtils.isBlank(city)) {
@@ -72,6 +77,7 @@ public class SchoolService {
         schoolRepository.save(entity);
     }
 
+    @Transactional
     public void addAddressToExistingSchoolId(Long schoolId, AddAddressToExistiongSchoolCommand command) {
         validationService.validate(command);
         SchoolEntity schoolEntity = schoolRepository.findById(schoolId)
@@ -87,7 +93,23 @@ public class SchoolService {
         schoolAddress.setPostCode(command.getPostCode());
         schoolAddress.setSchool(schoolEntity);
 
-        schoolAddressRepository.save(schoolAddress);
+        SchoolAddressEntity schoolAddressEntity = schoolAddressRepository.save(schoolAddress);
+
+        ContactTypeEntity email = dictionaryService.getContactTypeEntity("EMAIL");
+        ContactTypeEntity tel = dictionaryService.getContactTypeEntity("TEL");
+
+        SchoolContactEntity emailSchoolContact = new SchoolContactEntity();
+        emailSchoolContact.setSchoolAddress(schoolAddressEntity);
+        emailSchoolContact.setContactType(email);
+        emailSchoolContact.setValue(command.getEmail());
+
+        SchoolContactEntity phoneSchoolContact = new SchoolContactEntity();
+        phoneSchoolContact.setSchoolAddress(schoolAddressEntity);
+        phoneSchoolContact.setContactType(tel);
+        phoneSchoolContact.setValue(command.getPhone());
+
+        schoolContactRepository.save(emailSchoolContact);
+        schoolContactRepository.save(phoneSchoolContact);
     }
 
     @Transactional

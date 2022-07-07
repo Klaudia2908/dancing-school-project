@@ -5,9 +5,11 @@ import pl.klaudiajastrzebska.dancingschool.catalog.course.entity.CourseEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.course.schedules.dto.ScheduleDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonEntity;
 import pl.klaudiajastrzebska.dancingschool.dictionary.entity.DayEntity;
+import pl.klaudiajastrzebska.dancingschool.security.entity.UserEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -50,7 +52,10 @@ public class ScheduleEntity {
     @Column(name = "STATUS_ZAPIS")
     private boolean canSign;
 
-    public ScheduleDto toDto() {
+    @OneToMany(mappedBy = "schedule")
+    private List<EnrollmentEntity> enrollments = List.of();
+
+    public ScheduleDto toDto(String principalName) {
         return ScheduleDto
                 .builder()
                 .uuid(uuid)
@@ -61,6 +66,18 @@ public class ScheduleEntity {
                 .maxCapacity(maxCapacity)
                 .hourFrom(hourFrom)
                 .hourTo(hourTo)
+                .isCurrentUserSignedToThatSchedule(isGivenUserSignedToThatSchedule(principalName))
+                .takenPlaces(enrollments.size())
+                .placesAvailable(enrollments.size() != maxCapacity)
                 .build();
+    }
+
+    private boolean isGivenUserSignedToThatSchedule(String principalName) {
+        return enrollments
+                .stream()
+                .map(EnrollmentEntity::getPerson)
+                .map(PersonEntity::getUser)
+                .map(UserEntity::getLogin)
+                .anyMatch(principalName::equalsIgnoreCase);
     }
 }

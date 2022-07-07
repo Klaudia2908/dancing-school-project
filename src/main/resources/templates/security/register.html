@@ -55,6 +55,22 @@
                 </div>
             </div>
 
+            <div class="input_field"><span><i aria-hidden="true" class="fa fa-user"></i></span>
+                <input type="email" id="email" name="email" placeholder="Email" th:field="*{email}"/>
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == email"
+                       th:text="${validationError.message}"></p>
+                </div>
+            </div>
+
+            <div class="input_field"><span><i aria-hidden="true" class="fa fa-user"></i></span>
+                <input type="text" id="phone" name="phone" placeholder="Numer telefonu" th:field="*{phone}"/>
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == phone"
+                       th:text="${validationError.message}"></p>
+                </div>
+            </div>
+
             <div class="input_field radio_option">
                 <input type="radio" id="male" name="gender" th:value="mężczyzna" th:field="*{gender}"/>
                 <label for="male">Mężczyzna</label>

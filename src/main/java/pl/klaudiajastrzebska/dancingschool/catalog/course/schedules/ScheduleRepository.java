@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import pl.klaudiajastrzebska.dancingschool.catalog.course.schedules.entity.ScheduleEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> {
 
@@ -14,4 +15,6 @@ public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> 
             "WHERE ADR.IDENTYFIKATOR = :schoolIdentifier " +
             "AND K.UUID = :courseUUID", nativeQuery = true)
     List<ScheduleEntity> findAllForSchoolAndCourse(String schoolIdentifier, String courseUUID);
+
+    Optional<ScheduleEntity> findByUuid(String uuid);
 }

@@ -37,10 +37,8 @@ class SchoolAddressAdministrationController {
     @PostMapping("/schools/add/existing/{id}")
     String postAddAddressToExistingSchoolPage(@ModelAttribute AddAddressToExistiongSchoolCommand command, @PathVariable Long id, Model model) {
         catalogApi.addNewAddressToExistingSchool(id, command);
-        model.addAttribute("schools", catalogApi.getSchoolsByCity(ALL_SCHOOLS_STRING));
-        model.addAttribute("e", true);
 
-        return "administration/school/add-school";
+        return "redirect:/administration/schools/add/existing";
     }
 
     @ResponseStatus(HttpStatus.OK)

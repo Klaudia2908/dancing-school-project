@@ -29,6 +29,12 @@ class RegisterCommand {
     @NotBlank(message = ValidationMessages.NOT_BLANK)
     String gender;
 
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
+    String email;
+
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
+    String phone;
+
     @NotNull(message = ValidationMessages.NOT_NULL)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate birthDate;

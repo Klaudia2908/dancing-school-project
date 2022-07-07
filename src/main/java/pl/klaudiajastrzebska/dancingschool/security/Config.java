@@ -7,6 +7,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.klaudiajastrzebska.dancingschool.catalog.CatalogApi;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.EmployeeUserService;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.PersonContactRepository;
+import pl.klaudiajastrzebska.dancingschool.dictionary.DictionaryService;
 import pl.klaudiajastrzebska.dancingschool.validaton.ValidationService;
 
 @Configuration("securityConfig")
@@ -32,8 +34,11 @@ class Config {
                                             UserRolesRepository userRolesRepository,
                                             PasswordEncoder encoder,
                                             CatalogApi catalogApi,
-                                            ValidationService validationService) {
-        return new RegistrationService(userRepository, userRolesRepository, encoder, validationService, catalogApi);
+                                            ValidationService validationService,
+                                            DictionaryService dictionaryService,
+                                            PersonContactRepository personContactRepository) {
+
+        return new RegistrationService(userRepository, userRolesRepository, encoder, validationService, catalogApi, dictionaryService, personContactRepository);
     }
 
     @Bean

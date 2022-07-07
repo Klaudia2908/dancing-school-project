@@ -25,4 +25,10 @@ public class AddAddressToExistiongSchoolCommand {
 
     @NotBlank(message = ValidationMessages.NOT_BLANK)
     String shortName;
+
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
+    String phone;
+
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
+    String email;
 }

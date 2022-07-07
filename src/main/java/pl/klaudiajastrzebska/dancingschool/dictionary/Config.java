@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 class Config {
 
     @Bean
-    DictionaryService dictionaryService(DanceLevelRepository danceLevelRepository, DanceStyleRepository danceStyleRepository, AgeGroupRepository ageGroupRepository, DayRepository dayRepository) {
-        return new DictionaryService(danceLevelRepository, danceStyleRepository, ageGroupRepository, dayRepository);
+    DictionaryService dictionaryService(DanceLevelRepository danceLevelRepository, DanceStyleRepository danceStyleRepository, AgeGroupRepository ageGroupRepository, DayRepository dayRepository, ContactTypeRepository contactTypeRepository) {
+        return new DictionaryService(danceLevelRepository, danceStyleRepository, ageGroupRepository, dayRepository, contactTypeRepository);
     }
 }

@@ -16,5 +16,7 @@ public class SchoolDto {
     String postCode;
     String street;
     String shortName;
+    String email;
+    String phone;
     LocalDateTime closeDate;
 }

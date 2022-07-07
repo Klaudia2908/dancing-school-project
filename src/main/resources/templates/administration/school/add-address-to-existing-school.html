@@ -41,6 +41,14 @@
                 <div th:each="validationError : ${validationErrors}">
                     <p class="validationErrorParagraph" th:if="${validationError.fieldName} == shortName" th:text="${validationError.message}"></p>
                 </div>
+                <input class="form-input" type="number" minlength="9" maxlength="9" placeholder="Numer telefonu" th:field="*{phone}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == phone" th:text="${validationError.message}"></p>
+                </div>
+                <input class="form-input" type="email" placeholder="Email" th:field="*{email}">
+                <div th:each="validationError : ${validationErrors}">
+                    <p class="validationErrorParagraph" th:if="${validationError.fieldName} == email" th:text="${validationError.message}"></p>
+                </div>
                 <br />
                 <input class="button" type="submit">
             </form>

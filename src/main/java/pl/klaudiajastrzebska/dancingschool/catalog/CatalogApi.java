@@ -9,6 +9,7 @@ import pl.klaudiajastrzebska.dancingschool.catalog.person.EmployeeUserService;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.AddNewPersonCommand;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.EmployeeDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.PersonDto;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.SchoolService;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDefinitionDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
@@ -22,8 +23,8 @@ public class CatalogApi {
     private final SecurityService securityService;
     private final SchoolService schoolService;
 
-    public void addNewPerson(AddNewPersonCommand command) {
-        employeeUserService.addNewPerson(command);
+    public PersonEntity addNewPerson(AddNewPersonCommand command) {
+       return employeeUserService.addNewPerson(command);
     }
 
     public List<SchoolDto> getSchoolsByCity(String city) {

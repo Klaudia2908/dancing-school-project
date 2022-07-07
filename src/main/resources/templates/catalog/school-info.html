@@ -20,6 +20,8 @@
 <!--    <a th:if="${employeeAllowedToAddSchedule}" class="manage-button" th:href="@{/{schoolIdentifier}/courses(schoolIdentifier=${school.shortName})}">ZARZĄDZAJ</a>-->
     <h1 class="school-name" th:text="${school.name}"></h1>
     <p class="school-description" th:text="${school.description}"></p>
+    <p class="school-description" th:text="'email: ' + ${school.email}"></p>
+    <p class="school-description" th:text="'tel: ' + ${school.phone}"></p>
     <h3 class="header">Dostępne kursy</h3>
 
     <div class="courses-section">
@@ -44,7 +46,7 @@
                             </div>
                         </div>
                         <div class="sign-button-holder">
-                            <a class="sign-button" href="/">Zobacz haromonogramy</a>
+                            <a class="sign-button" th:href="@{'/' + ${schoolIdentifier} + '/schedules/' + ${course.uuid} + '/browse'}">Zobacz haromonogramy</a>
                         </div>
                     </div>
                 </div>

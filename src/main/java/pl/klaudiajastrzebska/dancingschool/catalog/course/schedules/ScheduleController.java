@@ -1,15 +1,16 @@
 package pl.klaudiajastrzebska.dancingschool.catalog.course.schedules;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.klaudiajastrzebska.dancingschool.UriUtils;
 import pl.klaudiajastrzebska.dancingschool.catalog.course.CourseService;
-import pl.klaudiajastrzebska.dancingschool.catalog.course.dto.AddCourseFormDataDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.course.schedules.dto.AddScheduleCommand;
 import pl.klaudiajastrzebska.dancingschool.catalog.course.schedules.dto.AddScheduleFormData;
+import pl.klaudiajastrzebska.dancingschool.catalog.course.schedules.dto.SignToAScheduleCommand;
 import pl.klaudiajastrzebska.dancingschool.catalog.instructors.InstructorService;
 import pl.klaudiajastrzebska.dancingschool.dictionary.DictionaryService;
 import pl.klaudiajastrzebska.dancingschool.security.PrincipalSecurityApi;
@@ -29,14 +30,46 @@ class ScheduleController {
 
     @GetMapping("/{schoolIdentifier}/schedules/{courseUUID}")
     String getMainScheduleViewForSchoolAndCourse(@PathVariable String schoolIdentifier, @PathVariable String courseUUID, Principal principal, Model model) {
+        String principalName = principal == null ? Strings.EMPTY : principal.getName();
         if (!principalSecurityApi.principalAllowedForGivenSchoolResource(principal, schoolIdentifier)) {
             return "/error";
         }
 
         model.addAttribute("courseName", courseService.getCourseNameByUuid(courseUUID));
-        model.addAttribute("schedules", scheduleService.getAllSchedulesForSchoolAndCourse(schoolIdentifier, courseUUID));
+        model.addAttribute("schedules", scheduleService.getAllSchedulesForSchoolAndCourseIncludingPrincipal(schoolIdentifier, courseUUID, principalName));
 
         return "catalog/courses/schedules/main";
+    }
+
+    @GetMapping("/{schoolIdentifier}/schedules/{courseUUID}/browse")
+    String getBrowseSchedulesView(@PathVariable String schoolIdentifier, @PathVariable String courseUUID, Model model, Principal principal) {
+        String principalName = principal == null ? Strings.EMPTY : principal.getName();
+        model.addAttribute("courseName", courseService.getCourseNameByUuid(courseUUID));
+        model.addAttribute("courseUUID", courseUUID);
+        model.addAttribute("schedules", scheduleService.getAllSchedulesForSchoolAndCourseIncludingPrincipal(schoolIdentifier, courseUUID, principalName));
+        model.addAttribute("instructors", instructorService.getInstructorsForSchool(schoolIdentifier));
+
+        return "catalog/courses/schedules/browse";
+    }
+
+    @GetMapping("/{schoolIdentifier}/schedules/{courseUUID}/sign/{scheduleUUID}")
+    String processSignToSchedule(@PathVariable String schoolIdentifier, @PathVariable String courseUUID, @PathVariable String scheduleUUID, Principal principal, Model model) {
+        String principalName = principal == null ? Strings.EMPTY : principal.getName();
+        SignToAScheduleCommand signCommand = SignToAScheduleCommand
+                .builder()
+                .principalName(principal.getName())
+                .scheduleUUID(scheduleUUID)
+                .schoolIdentifier(schoolIdentifier)
+                .build();
+
+        scheduleService.signToASchedule(signCommand);
+
+        model.addAttribute("courseUUID", courseUUID);
+        model.addAttribute("courseName", courseService.getCourseNameByUuid(courseUUID));
+        model.addAttribute("schedules", scheduleService.getAllSchedulesForSchoolAndCourseIncludingPrincipal(schoolIdentifier, courseUUID, principalName));
+        model.addAttribute("instructors", instructorService.getInstructorsForSchool(schoolIdentifier));
+
+        return "redirect:/" + schoolIdentifier + "/schedules/" + courseUUID + "/browse";
     }
 
     @GetMapping("/{schoolIdentifier}/schedules/{courseUUID}/add")
@@ -58,6 +91,8 @@ class ScheduleController {
             return "/error";
         }
 
+        String principalName = principal == null ? Strings.EMPTY : principal.getName();
+
         AddScheduleCommand command = AddScheduleCommand
                 .builder()
                 .addScheduleFormData(addScheduleFormData)
@@ -69,7 +104,7 @@ class ScheduleController {
         scheduleService.addScheduleForSchoolAndPrincipal(command);
 
         model.addAttribute("courseName", courseService.getCourseNameByUuid(courseUUID));
-        model.addAttribute("schedules", scheduleService.getAllSchedulesForSchoolAndCourse(schoolIdentifier, courseUUID));
+        model.addAttribute("schedules", scheduleService.getAllSchedulesForSchoolAndCourseIncludingPrincipal(schoolIdentifier, courseUUID, principalName));
 
         return "catalog/courses/schedules/main";
     }
