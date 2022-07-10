@@ -11,12 +11,12 @@ public interface SchoolAddressRepository extends JpaRepository<SchoolAddressEnti
     @Query(value = "SELECT * FROM ADRES_SZKOLY ADR_SZK " +
             "JOIN SZKOLY SZK ON SZK.ID = ADR_SZK.ID_SZKOLY " +
             "WHERE UPPER(ADR_SZK.MIEJSCOWOSC) = UPPER(:city) " +
-            "AND NVL(ADR_SZK.DATA_ZAMKNIECIA, SYSDATE + 1) >= SYSDATE", nativeQuery = true)
+            "AND ISNULL(ADR_SZK.DATA_ZAMKNIECIA, GETDATE() + 1) >= GETDATE()", nativeQuery = true)
     List<SchoolAddressEntity> findSchoolsByCity(String city);
 
     @Query(value = "SELECT * FROM ADRES_SZKOLY ADR_SZK " +
             "JOIN SZKOLY SZK ON SZK.ID = ADR_SZK.ID_SZKOLY " +
-            "AND NVL(ADR_SZK.DATA_ZAMKNIECIA, SYSDATE + 1) >= SYSDATE", nativeQuery = true)
+            "AND ISNULL(ADR_SZK.DATA_ZAMKNIECIA, GETDATE() + 1) >= GETDATE()", nativeQuery = true)
     List<SchoolAddressEntity> findAllActiveSchoolAddresses();
 
     @Query(value = "SELECT * FROM ADRES_SZKOLY ADR_SZK " +
