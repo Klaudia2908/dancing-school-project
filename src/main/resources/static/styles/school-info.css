@@ -45,7 +45,7 @@
 .school-name{
     font-size: 45px;
     margin-bottom: 1%;
-    margin-top: 1%;
+    margin-top: 3%;
 }
 
 .school-description {
@@ -195,6 +195,7 @@
 .manage-buttons-section {
     display: flex;
     position: absolute;
+    margin-top: 3%;
     right: 5%;
 }
 

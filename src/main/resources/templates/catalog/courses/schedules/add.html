@@ -12,13 +12,13 @@
     <h3>Wprowadź dane:</h3>
     <form class="schedule-form" th:action="@{'/' + ${schoolIdentifier} + '/schedules/' + ${courseUUID} + '/add'}" th:object="${addScheduleFormData}" method="post">
 
-        <label class="label" for="dateFrom">Data obowiązywania od:</label>
+        <label class="label" for="dateFrom">Data rozpoczęcia:</label>
         <input type="date" id="dateFrom" th:field="*{dateFrom}">
         <div th:each="validationError : ${validationErrors}">
             <p class="validationErrorParagraph" th:if="${validationError.fieldName} == dateFrom" th:text="${validationError.message}"></p>
         </div>
 
-        <label class="label" for="dateTo">Data obowiązywania do:</label>
+        <label class="label" for="dateTo">Data zakończenia:</label>
         <input type="date" id="dateTo" th:field="*{dateTo}">
         <div th:each="validationError : ${validationErrors}">
             <p class="validationErrorParagraph" th:if="${validationError.fieldName} == dateTo" th:text="${validationError.message}"></p>

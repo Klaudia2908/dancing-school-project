@@ -25,7 +25,6 @@
                     <th> Imię</th>
                     <th> Nazwisko</th>
                     <th> Płeć</th>
-                    <th> Opis</th>
                     <th> Dane szkoły</th>
                     <th></th>
                 </tr>
@@ -39,7 +38,6 @@
                     <td><span th:text="${employee.firstName}"> Login </span></td>
                     <td><span th:text="${employee.lastName}"> Login </span></td>
                     <td><span th:text="${employee.gender}"> Login </span></td>
-                    <td><span th:text="${employee.description}"> Login </span></td>
                     <td><span th:text="${employee.schoolNameAndAddress}"> Login </span></td>
 
                     <td><a class="delete" th:href="@{employees/delete/{login}(login=${employee.login})}">USUŃ</a></td>
