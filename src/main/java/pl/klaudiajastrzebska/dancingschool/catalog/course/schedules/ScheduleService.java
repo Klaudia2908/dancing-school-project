@@ -30,7 +30,7 @@ public class ScheduleService {
 
 
     public List<ScheduleDto> getAllSchedulesForSchoolAndCourseIncludingPrincipal(String schoolIdentifier, String courseUUID, String principalName) {
-        return scheduleRepository.findAllForSchoolAndCourse(schoolIdentifier, courseUUID)
+        return scheduleRepository.findAllForSchoolAndCourseForClient(schoolIdentifier, courseUUID)
                 .stream()
                 .map(entity -> entity.toDto(principalName))
                 .toList();
@@ -44,8 +44,16 @@ public class ScheduleService {
     }
 
     public void signToASchedule(SignToAScheduleCommand signCommand) {
-        EnrollmentEntity enrollment = buildEnrollmentEntity(signCommand);
+        String scheduleUUID = signCommand.getScheduleUUID();
+        ScheduleEntity scheduleEntity = scheduleRepository.findByUuid(scheduleUUID).get();
+        int size = scheduleEntity.getEnrollments().size();
 
+        if(scheduleEntity.getMaxCapacity() == size + 1){
+            scheduleEntity.setSignStatus("Z");
+            scheduleRepository.save(scheduleEntity);
+        }
+
+        EnrollmentEntity enrollment = buildEnrollmentEntity(signCommand);
         enrollmentRepository.save(enrollment);
     }
 
@@ -56,7 +64,7 @@ public class ScheduleService {
         DayEntity day = dayRepository.findByValue(scheduleFormData.getDayOfWeek()).get();
 
         ScheduleEntity scheduleEntity = new ScheduleEntity();
-        scheduleEntity.setCanSign(true);
+        scheduleEntity.setSignStatus("A");
         scheduleEntity.setDateFrom(scheduleFormData.getDateFrom());
         scheduleEntity.setDateTo(scheduleFormData.getDateTo());
         scheduleEntity.setHourFrom(scheduleFormData.getTimeStart());
@@ -83,5 +91,12 @@ public class ScheduleService {
         enrollment.setPaymentDate(signDate);
 
         return enrollment;
+    }
+
+    public List<ScheduleDto>  getAllSchedulesForSchoolAndCourseForAdmin(String schoolIdentifier, String courseUUID, String principalName) {
+        return scheduleRepository.findAllForSchoolAndCourseForAdmin(schoolIdentifier, courseUUID)
+                .stream()
+                .map(entity -> entity.toDto(principalName))
+                .toList();
     }
 }

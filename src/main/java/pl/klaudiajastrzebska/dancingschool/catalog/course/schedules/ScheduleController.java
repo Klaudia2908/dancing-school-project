@@ -36,7 +36,7 @@ class ScheduleController {
         }
 
         model.addAttribute("courseName", courseService.getCourseNameByUuid(courseUUID));
-        model.addAttribute("schedules", scheduleService.getAllSchedulesForSchoolAndCourseIncludingPrincipal(schoolIdentifier, courseUUID, principalName));
+        model.addAttribute("schedules", scheduleService.getAllSchedulesForSchoolAndCourseForAdmin(schoolIdentifier, courseUUID, principalName));
 
         return "catalog/courses/schedules/main";
     }
@@ -104,7 +104,7 @@ class ScheduleController {
         scheduleService.addScheduleForSchoolAndPrincipal(command);
 
         model.addAttribute("courseName", courseService.getCourseNameByUuid(courseUUID));
-        model.addAttribute("schedules", scheduleService.getAllSchedulesForSchoolAndCourseIncludingPrincipal(schoolIdentifier, courseUUID, principalName));
+        model.addAttribute("schedules", scheduleService.getAllSchedulesForSchoolAndCourseForAdmin(schoolIdentifier, courseUUID, principalName));
 
         return "catalog/courses/schedules/main";
     }

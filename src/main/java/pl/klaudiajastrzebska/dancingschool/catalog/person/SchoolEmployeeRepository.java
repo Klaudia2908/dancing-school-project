@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-interface SchoolEmployeeRepository extends JpaRepository<SchoolEmployeeEntity, Long> {
+public interface SchoolEmployeeRepository extends JpaRepository<SchoolEmployeeEntity, Long> {
 
     @Query(value = "select * from szkoly_pracownicy szkpr " +
             "join osoby os on szkpr.id_pracownika = os.id " +
@@ -40,6 +40,16 @@ interface SchoolEmployeeRepository extends JpaRepository<SchoolEmployeeEntity, L
             "and adr.identyfikator=:schoolIdentifier " +
             "and NVL(sp.DATA_KONCA_ZATR, SYSDATE + 1) > SYSDATE", nativeQuery = true)
     List<SchoolEmployeeEntity> findAllInstructorsForSchoolIdentifier(String schoolIdentifier);
+
+    @Query(value = "select * from szkoly_pracownicy sp " +
+            "join osoby o on o.id = sp.id_pracownika " +
+            "join adres_szkoly adr on adr.id = sp.id_szkoly " +
+            "join s_typ_osoby typ_os on typ_os.id = o.id_typ_osoby " +
+            "where typ_os.nazwa='EMPLOYEE' " +
+            "and adr.identyfikator=:schoolIdentifier " +
+            "and NVL(sp.DATA_KONCA_ZATR, SYSDATE + 1) > SYSDATE", nativeQuery = true)
+    List<SchoolEmployeeEntity> findAllEmployeesForSchoolIdentifier(String schoolIdentifier);
+
 
     @Query(value = "select * from szkoly_pracownicy sp " +
             "join osoby o on o.id = sp.id_pracownika " +

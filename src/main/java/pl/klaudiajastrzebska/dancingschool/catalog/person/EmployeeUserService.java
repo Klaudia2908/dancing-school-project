@@ -1,6 +1,7 @@
 package pl.klaudiajastrzebska.dancingschool.catalog.person;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.Strings;
 import pl.klaudiajastrzebska.dancingschool.administration.employees.dto.CreateEmployeeRequest;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.dto.*;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.PersonEntity;
@@ -65,7 +66,7 @@ public class EmployeeUserService {
         PersonEntity personEntity = new PersonEntity();
         personEntity.setFirstName(command.getFirstName());
         personEntity.setLastName(command.getLastName());
-        personEntity.setGender(command.getGender());
+        personEntity.setGender(Strings.toRootUpperCase(command.getGender().substring(0,1)));
         personEntity.setBirthDate(command.getBirthDate());
         personEntity.setDescription(command.getDescription());
         if (command.getUserId() != null) {
@@ -104,7 +105,7 @@ public class EmployeeUserService {
         employee.setLastName(request.getLastName());
         employee.setDescription("");
         employee.setPersonType(personTypeEmployee);
-        employee.setGender(request.getGender());
+        employee.setGender(Strings.toRootUpperCase(request.getGender().substring(0,1)));
 
         personRepository.save(employee);
     }

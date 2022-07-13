@@ -7,6 +7,8 @@ import pl.klaudiajastrzebska.dancingschool.administration.school.dto.AddNewSchoo
 import pl.klaudiajastrzebska.dancingschool.administration.school.dto.EditSchoolDataCommand;
 import pl.klaudiajastrzebska.dancingschool.catalog.CatalogApi;
 import pl.klaudiajastrzebska.dancingschool.catalog.person.EmployeeUserService;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.SchoolEmployeeRepository;
+import pl.klaudiajastrzebska.dancingschool.catalog.person.entity.SchoolEmployeeEntity;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDefinitionDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.dto.SchoolDto;
 import pl.klaudiajastrzebska.dancingschool.catalog.school.entity.SchoolAddressEntity;
@@ -18,6 +20,7 @@ import pl.klaudiajastrzebska.dancingschool.dictionary.entity.ContactTypeEntity;
 import pl.klaudiajastrzebska.dancingschool.validaton.ValidationService;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +30,7 @@ import java.util.stream.Collectors;
 public class SchoolService {
     private final SchoolAddressRepository schoolAddressRepository;
     private final SchoolContactRepository schoolContactRepository;
+    private final SchoolEmployeeRepository schoolEmployeeRepository;
     private final SchoolRepository schoolRepository;
     private final ValidationService validationService;
     private final DictionaryService dictionaryService;
@@ -60,12 +64,25 @@ public class SchoolService {
                 .orElseThrow(() -> new IllegalArgumentException("Cannot find school for given identifier: " + schoolIdentifier));
     }
 
-    @Transactional
     public void deleteSchoolByShortName(String schoolShortName) {
+        LocalDateTime schoolCloseDate = LocalDateTime.now();
         SchoolAddressEntity schoolByIdentifier = schoolAddressRepository.findSchoolByIdentifier(schoolShortName)
                 .orElseThrow(() -> new IllegalArgumentException("Cannot find school for given identifier: " + schoolShortName));
 
-        schoolByIdentifier.setCloseDate(LocalDateTime.now());
+        schoolByIdentifier.setCloseDate(schoolCloseDate);
+        schoolAddressRepository.save(schoolByIdentifier);
+
+        List<SchoolEmployeeEntity> allEmployeesForSchoolIdentifier = schoolEmployeeRepository.findAllEmployeesForSchoolIdentifier(schoolShortName);
+        for(SchoolEmployeeEntity entity : allEmployeesForSchoolIdentifier){
+            entity.setEmploymentEndDate(schoolCloseDate.toLocalDate());
+            schoolEmployeeRepository.save(entity);
+        }
+
+        List<SchoolEmployeeEntity> allInstructorsForSchoolIdentifier = schoolEmployeeRepository.findAllInstructorsForSchoolIdentifier(schoolShortName);
+        for(SchoolEmployeeEntity entity : allInstructorsForSchoolIdentifier){
+            entity.setEmploymentEndDate(schoolCloseDate.toLocalDate());
+            schoolEmployeeRepository.save(entity);
+        }
     }
 
     public void addNewSchool(AddNewSchoolCommand command) {

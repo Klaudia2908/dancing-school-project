@@ -50,7 +50,7 @@ public class ScheduleEntity {
     private LocalDate dateTo;
 
     @Column(name = "STATUS_ZAPIS")
-    private boolean canSign;
+    private String signStatus;
 
     @OneToMany(mappedBy = "schedule")
     private List<EnrollmentEntity> enrollments = List.of();

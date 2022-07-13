@@ -52,7 +52,7 @@ class SchoolAdministrationController {
         catalogApi.deleteSchoolByShortName(schoolIdentifier);
         model.addAttribute("schools", catalogApi.getSchoolsByCity(ALL_SCHOOLS_STRING));
 
-        return "redirect:/administration/school/schools";
+        return "redirect:/administration/schools";
     }
 
     @ResponseStatus(HttpStatus.OK)
