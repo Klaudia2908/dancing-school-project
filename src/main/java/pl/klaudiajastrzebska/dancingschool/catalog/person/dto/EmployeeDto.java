@@ -16,4 +16,5 @@ public class EmployeeDto {
     String description;
     LocalDate birthDate;
     String schoolNameAndAddress;
+    String schoolIdentifier;
 }

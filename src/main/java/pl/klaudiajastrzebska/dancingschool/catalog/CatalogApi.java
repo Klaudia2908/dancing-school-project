@@ -90,4 +90,8 @@ public class CatalogApi {
     public void attachEmployeeToSchool(String employeeLogin, String schoolIdentifier) {
         employeeUserService.attachEmployeeToSchool(employeeLogin, schoolIdentifier);
     }
+
+    public void deleteEmployee(String employeeLogin, String schoolIdentifier) {
+        employeeUserService.deleteEmployee(employeeLogin, schoolIdentifier);
+    }
 }

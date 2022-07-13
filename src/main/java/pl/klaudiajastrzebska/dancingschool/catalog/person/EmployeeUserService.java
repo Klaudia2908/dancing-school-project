@@ -16,6 +16,8 @@ import pl.klaudiajastrzebska.dancingschool.security.entity.UserEntity;
 import pl.klaudiajastrzebska.dancingschool.security.entity.UserRolesEntity;
 import pl.klaudiajastrzebska.dancingschool.validaton.ValidationService;
 
+import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -66,7 +68,7 @@ public class EmployeeUserService {
         personEntity.setGender(command.getGender());
         personEntity.setBirthDate(command.getBirthDate());
         personEntity.setDescription(command.getDescription());
-        if(command.getUserId() != null){
+        if (command.getUserId() != null) {
             personEntity.setUser(userRepository.findById(command.getUserId()).get());
         }
         personEntity.setPersonType(value.get());
@@ -146,7 +148,14 @@ public class EmployeeUserService {
         SchoolEmployeeEntity schoolEmployeeEntity = new SchoolEmployeeEntity();
         schoolEmployeeEntity.setEmployee(employee);
         schoolEmployeeEntity.setSchool(schoolAddress);
+        schoolEmployeeEntity.setEmploymentStartDate(LocalDate.now());
 
         schoolEmployeeRepository.save(schoolEmployeeEntity);
+    }
+
+    @Transactional
+    public void deleteEmployee(String employeeLogin, String schoolIdentifier) {
+        SchoolEmployeeEntity schoolEmployee = schoolEmployeeRepository.findEmployeeWithLoginAndSchoolIdentifier(employeeLogin, schoolIdentifier).get();
+        schoolEmployee.setEmploymentEndDate(LocalDate.now());
     }
 }

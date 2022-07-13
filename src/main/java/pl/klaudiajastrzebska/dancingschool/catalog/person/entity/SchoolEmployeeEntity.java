@@ -7,6 +7,7 @@ import pl.klaudiajastrzebska.dancingschool.catalog.school.entity.SchoolAddressEn
 import pl.klaudiajastrzebska.dancingschool.security.entity.UserEntity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -25,6 +26,12 @@ public class SchoolEmployeeEntity {
     @JoinColumn(name = "ID_PRACOWNIKA", referencedColumnName = "ID")
     private PersonEntity employee;
 
+    @Column(name = "DATA_POCZ_ZATR")
+    private LocalDate employmentStartDate;
+
+    @Column(name = "DATA_KONCA_ZATR")
+    private LocalDate employmentEndDate;
+
     public EmployeeDto toDto() {
         UserEntity user = employee.getUser() == null ? new UserEntity() : employee.getUser();
 
@@ -38,6 +45,7 @@ public class SchoolEmployeeEntity {
                 .gender(employee.getGender())
                 .birthDate(employee.getBirthDate())
                 .schoolNameAndAddress(getSchoolInformation(school))
+                .schoolIdentifier(school.getShortName())
                 .build();
     }
 

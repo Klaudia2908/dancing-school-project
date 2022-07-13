@@ -38,6 +38,13 @@ class EmployeesAdministrationController {
         return "/administration/employees/attach";
     }
 
+    @GetMapping("employees/delete/{employeeLogin}/{schoolIdentifier}")
+    String deleteEmployee(@PathVariable String employeeLogin, @PathVariable String schoolIdentifier, Model model){
+        catalogApi.deleteEmployee(employeeLogin, schoolIdentifier);
+
+        return "redirect:/administration/employees";
+    }
+
     @GetMapping("/employees/attach/{employeeLogin}")
     String getAttachSchoolToSpecificEmployeeScreen(Model model, @PathVariable String employeeLogin) {
         model.addAttribute("login", employeeLogin);
