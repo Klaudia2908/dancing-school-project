@@ -14,7 +14,7 @@ public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> 
             "JOIN ADRES_SZKOLY ADR ON ADR.ID = K.ID_ADRES_SZKOLY " +
             "WHERE ADR.IDENTYFIKATOR = :schoolIdentifier " +
             "AND K.UUID = :courseUUID " +
-            "AND NVL(H.DATA_KONIEC, SYSDATE + 1) > SYSDATE ", nativeQuery = true)
+            "AND isnull(H.DATA_KONIEC, getdate() + 1) > getdate() ", nativeQuery = true)
     List<ScheduleEntity> findAllForSchoolAndCourseForClient(String schoolIdentifier, String courseUUID);
 
     @Query(value = "SELECT * FROM HARMONOGRAMY H " +

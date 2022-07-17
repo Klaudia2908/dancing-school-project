@@ -12,7 +12,7 @@ public interface PersonRepository extends JpaRepository<PersonEntity, Long> {
             "join S_TYP_OSOBY typ_os on typ_os.id = os.ID_TYP_OSOBY " +
             "left join SZKOLY_PRACOWNICY szk_prac on szk_prac.id_pracownika = os.id " +
             "where typ_os.nazwa ='EMPLOYEE' " +
-            "and (nvl(szk_prac.DATA_KONCA_ZATR, sysdate + 1) < sysdate OR szk_prac.id_pracownika is null)", nativeQuery = true)
+            "and (isnull(szk_prac.DATA_KONCA_ZATR, getdate() + 1) < getdate() OR szk_prac.id_pracownika is null)", nativeQuery = true)
     List<PersonEntity> findAllEmployeesWithoutSchool();
 
 

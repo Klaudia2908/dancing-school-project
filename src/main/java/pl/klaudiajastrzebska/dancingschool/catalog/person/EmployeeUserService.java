@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class EmployeeUserService {
-    private static final String DEFAULT_EMPLOYEE_NEW_PASSWORD = "$2a$10$lXojkbR.q2zWWqlTgjQMUu1EZu7TD.vBZ03VC.ycrcxft2sr7qVmG";
+    private static final String DEFAULT_EMPLOYEE_NEW_PASSWORD = "$2a$12$GoE4ceEe8C7.Sij.0/BRbuCtqOXQy2OEKeuRwbsr32FUWLe3T6bDW";
     private static final String EMPLOYEE_ROLE = "EMPLOYEE";
 
     private final ValidationService validationService;
@@ -103,7 +103,6 @@ public class EmployeeUserService {
         employee.setBirthDate(request.getBirthDate());
         employee.setFirstName(request.getFirstName());
         employee.setLastName(request.getLastName());
-        employee.setDescription("");
         employee.setPersonType(personTypeEmployee);
         employee.setGender(Strings.toRootUpperCase(request.getGender().substring(0,1)));
 

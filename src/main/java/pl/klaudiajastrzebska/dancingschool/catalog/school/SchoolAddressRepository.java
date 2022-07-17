@@ -11,12 +11,12 @@ public interface SchoolAddressRepository extends JpaRepository<SchoolAddressEnti
     @Query(value = "SELECT * FROM ADRES_SZKOLY ADR_SZK " +
             "JOIN SZKOLY SZK ON SZK.ID = ADR_SZK.ID_SZKOLY " +
             "WHERE UPPER(ADR_SZK.MIEJSCOWOSC) = UPPER(:city) " +
-            "AND ISNULL(ADR_SZK.DATA_ZAMKNIECIA, SYSDATE + 1) >= SYSDATE", nativeQuery = true)
+            "AND ISNULL(ADR_SZK.DATA_ZAMKNIECIA, getdate() + 1) >= getdate()", nativeQuery = true)
     List<SchoolAddressEntity> findSchoolsByCity(String city);
 
     @Query(value = "SELECT * FROM ADRES_SZKOLY ADR_SZK " +
             "JOIN SZKOLY SZK ON SZK.ID = ADR_SZK.ID_SZKOLY " +
-            "AND ISNULL(ADR_SZK.DATA_ZAMKNIECIA, SYSDATE + 1) >= SYSDATE", nativeQuery = true)
+            "AND ISNULL(ADR_SZK.DATA_ZAMKNIECIA, getdate() + 1) >= getdate()", nativeQuery = true)
     List<SchoolAddressEntity> findAllActiveSchoolAddresses();
 
     @Query(value = "SELECT * FROM ADRES_SZKOLY ADR_SZK " +
@@ -35,6 +35,6 @@ public interface SchoolAddressRepository extends JpaRepository<SchoolAddressEnti
             "                             join osoby os1 on os1.id = szkPr1.id_pracownika " +
             "                             join users us1 on us1.id = os1.id_user " +
             "                                where us1.login = :login " +
-            "                                and nvl(szkPr1.data_konca_zatr, sysdate + 1) > sysdate)", nativeQuery = true)
+            "                                and isnull(szkPr1.data_konca_zatr, getdate() + 1) > getdate())", nativeQuery = true)
     List<SchoolAddressEntity> findAllAddressesAvailableForAttachingForLogin(String login);
 }
