@@ -8,7 +8,7 @@ import pl.klaudiajastrzebska.dancingschool.catalog.person.EmployeeUserService;
 class Config {
 
     @Bean
-    ReportsService reportsService(EmployeeUserService employeeUserService, ViewSavedPeopleRepository viewSavedPeopleRepository){
-        return new ReportsService(viewSavedPeopleRepository, employeeUserService);
+    ReportsService reportsService(EmployeeUserService employeeUserService, ViewSavedPeopleRepository viewSavedPeopleRepository, InstructorCoursesReportRepository instructorCoursesReportRepository){
+        return new ReportsService(viewSavedPeopleRepository, instructorCoursesReportRepository, employeeUserService);
     }
 }
