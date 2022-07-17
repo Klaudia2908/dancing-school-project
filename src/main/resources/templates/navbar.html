@@ -39,6 +39,12 @@
                        </ul>
                    </div>
 
+                   <div sec:authorize="hasAuthority('EMPLOYEE')">
+                       <ul class="menu-list">
+                           <li>  <a th:href="@{/reports}" >Raporty</a></li>
+                       </ul>
+                   </div>
+
                    <div sec:authorize="hasAuthority('ADMIN')">
                        <ul class="menu-list">
                            <li>  <a th:href="@{/administration}" >Administruj</a></li>

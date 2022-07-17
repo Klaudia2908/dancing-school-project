@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Raporty</title>
+    <link th:href="@{/styles/reports/main.css}" rel="stylesheet">
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+</head>
+<body>
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+<div class="container">
+    <div class="screen-section grow-3">
+        <div class="report-container">
+            <table>
+                <thead>
+                <tr>
+                    <th> Nazwa kursu</th>
+                    <th> Nazwa szkoły</th>
+                    <th> Miejscowość</th>
+                    <th> Identyfikator szkoły</th>
+                    <th> Data rozpoczęcia</th>
+                    <th> Data zakończenia</th>
+                    <th> Godzina rozpoczęcia</th>
+                    <th> Godzina zakończenia</th>
+                    <th> Dzień tygodnia</th>
+                    <th> Zapisanych osób</th>
+                    <th> Maksymalna liczba osób</th>
+                    <th> Status zapisu</th>
+                </tr>
+                </thead>
+                <body>
+                <tr th:if="${signedPeopleReportData.empty}">
+                    <td colspan="2"> Brak raportów do wyświetlenia</td>
+                </tr>
+                <tr th:each="singleReportData : ${signedPeopleReportData}">
+                    <td><span th:text="${singleReportData.courseName}"> Nazwa kursu </span></td>
+                    <td><span th:text="${singleReportData.schoolName}"> Nazwa szkoły</span></td>
+                    <td><span th:text="${singleReportData.schoolCity}"> Miejscowość</span></td>
+                    <td><span th:text="${singleReportData.schoolIdentifier}"> Identyfikator</span></td>
+                    <td><span th:text="${singleReportData.startDate}"> Data rozpoczęcia</span></td>
+                    <td><span th:text="${singleReportData.endDate}"> Data zakońcenia</span></td>
+                    <td><span th:text="${singleReportData.hourFrom}"> Godzina od</span></td>
+                    <td><span th:text="${singleReportData.hourTo}"> Godzina do</span></td>
+                    <td><span th:text="${singleReportData.dayOfWeek}"> Dzień tygodnia</span></td>
+                    <td><span th:text="${singleReportData.savedPeopleCount}"> Liczba zapisanych osób</span></td>
+                    <td><span th:text="${singleReportData.maxCapacity}"> Max liczba zapisanych osób</span></td>
+                    <td><span th:text="${singleReportData.registrationStatus}"> status zapisu</span></td>
+                </tr>
+                </body>
+            </table>
+        </div>
+    </div>
+    <div class="screen-section grow-1"></div>
+    <div class="screen-section grow-1"></div>
+</div>
+</body>
+</html>

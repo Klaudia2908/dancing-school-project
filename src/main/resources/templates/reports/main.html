@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Raporty</title>
+    <link th:href="@{/styles/reports/main.css}" rel="stylesheet">
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet">
+</head>
+<body>
+<nav>
+    <div th:insert="navbar.html :: navbar"/>
+</nav>
+
+<div class="container">
+    <div class="screen-section grow-3">
+        <div class="buttons-container">
+            <a class="button" th:href="@{/reports/signed}">ZAPISANE OSOBY</a>
+            <a class="button" th:href="@{/administration/employees}">CHUJ KURWA</a>
+        </div>
+    </div>
+    <div class="screen-section grow-1"></div>
+    <div class="screen-section grow-1"></div>
+</body>
+</html>
